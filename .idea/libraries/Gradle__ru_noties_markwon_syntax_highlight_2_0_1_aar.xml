@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: ru.noties:markwon-syntax-highlight:2.0.1@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-markwon-syntax-highlight-2.0.1.aar/d521945493f73d08a3dc0c7d5a4d1582/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-markwon-syntax-highlight-2.0.1.aar/d521945493f73d08a3dc0c7d5a4d1582/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/ru.noties/markwon-syntax-highlight/2.0.1/d0c88be56a61329113a134e32f916a670592c193/markwon-syntax-highlight-2.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

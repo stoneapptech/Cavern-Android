@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/nav_bottom_items"
+            app:startDestination="@id/navigation_article">
+
+    <fragment
+        android:id="@+id/navigation_user"
+        android:name="tech.stoneapp.secminhr.cavern.accountInfo.user.UserFragment"
+        android:label="UserFragment" />
+
+    <fragment
+        android:id="@+id/navigation_login"
+        android:name="tech.stoneapp.secminhr.cavern.login.LoginFragment"
+        android:label="LoginFragment"/>
+    <fragment
+        android:id="@+id/navigation_article"
+        android:name="tech.stoneapp.secminhr.cavern.articles.ArticleFragment"
+        android:label="ArticleFragment">
+        <action
+            android:id="@+id/action_navigation_article_to_articleContentFragment"
+            app:destination="@id/articleContentFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/articleContentFragment"
+        android:name="tech.stoneapp.secminhr.cavern.articlecontent.ArticleContentFragment"
+        android:label="ArticleContentFragment"/>
+</navigation>

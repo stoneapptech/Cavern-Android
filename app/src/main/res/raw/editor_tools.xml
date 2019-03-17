@@ -1,0 +1,32 @@
+<tools>
+    <item icon="ic_looks_one_black_24dp"
+          action="tech.stoneapp.secminhr.cavern.editor.tools.Header1" />
+    <item icon="ic_looks_two_black_24dp"
+          action="tech.stoneapp.secminhr.cavern.editor.tools.Header2" />
+    <item icon="ic_looks_3_black_24dp"
+          action="tech.stoneapp.secminhr.cavern.editor.tools.Header3" />
+    <item icon="ic_looks_4_black_24dp"
+          action="tech.stoneapp.secminhr.cavern.editor.tools.Header4" />
+    <item icon="ic_looks_5_black_24dp"
+          action="tech.stoneapp.secminhr.cavern.editor.tools.Header5" />
+    <item icon="ic_looks_6_black_24dp"
+          action="tech.stoneapp.secminhr.cavern.editor.tools.Header6" />
+    <item icon="ic_link_black_24dp"
+          action="tech.stoneapp.secminhr.cavern.editor.tools.Link" />
+    <item icon="ic_format_italic_black_24dp"
+          action="tech.stoneapp.secminhr.cavern.editor.tools.Italic" />
+    <item icon="ic_format_bold_black_24dp"
+          action="tech.stoneapp.secminhr.cavern.editor.tools.Bold" />
+    <item icon="ic_strikethrough_s_black_24dp"
+          action="tech.stoneapp.secminhr.cavern.editor.tools.Strike" />
+    <item icon="ic_photo_black_24dp"
+          action="tech.stoneapp.secminhr.cavern.editor.tools.Photo" />
+    <item icon="ic_format_list_bulleted_black_24dp"
+          action="tech.stoneapp.secminhr.cavern.editor.tools.BulletedList" />
+    <item icon="ic_format_list_numbered_black_24dp"
+          action="tech.stoneapp.secminhr.cavern.editor.tools.NumberedList" />
+    <item icon="ic_format_quote_black_24dp"
+          action="tech.stoneapp.secminhr.cavern.editor.tools.Quote" />
+    <item icon="ic_code_black_24dp"
+          action="tech.stoneapp.secminhr.cavern.editor.tools.Code" />
+</tools>

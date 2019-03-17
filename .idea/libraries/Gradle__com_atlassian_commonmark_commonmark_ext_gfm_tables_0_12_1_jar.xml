@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.atlassian.commonmark:commonmark-ext-gfm-tables:0.12.1@jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.atlassian.commonmark/commonmark-ext-gfm-tables/0.12.1/f9523a11c66602e06308d808f9bc15963207cb24/commonmark-ext-gfm-tables-0.12.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.atlassian.commonmark/commonmark-ext-gfm-tables/0.12.1/13a276d86ba82a3976beed822c7d7792d253020/commonmark-ext-gfm-tables-0.12.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

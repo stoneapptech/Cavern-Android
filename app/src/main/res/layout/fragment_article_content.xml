@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="article"
+            type="tech.stoneapp.secminhr.cavern.api.results.ArticleContent" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:translationZ="2dp"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".articlecontent.ArticleContentFragment">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
+
+            <ScrollView
+                android:id="@+id/mainScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/content_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="invisible"
+                    tools:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/title_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:fontFamily="@font/roboto"
+                            android:paddingLeft="16dp"
+                            android:paddingTop="8dp"
+                            android:paddingRight="16dp"
+                            android:paddingBottom="8dp"
+                            android:text="@{article.title}"
+                            android:textColor="@color/colorText"
+                            android:textSize="20sp"
+                            tools:text="Header">
+
+                            <requestFocus/>
+                        </TextView>
+
+                        <ImageButton
+                            android:id="@+id/likeButton"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginEnd="16dp"
+                            android:background="@android:color/transparent"
+                            app:layout_constraintBottom_toTopOf="@+id/guideline4"
+                            app:layout_constraintEnd_toStartOf="@+id/numTextView"
+                            app:layout_constraintTop_toBottomOf="@+id/guideline2"
+                            app:srcCompat="@drawable/thumb_up_outline"/>
+                    </LinearLayout>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip"
+                        style="@style/Widget.MaterialComponents.Chip.Action"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="@{article.authorNickname}"
+                        tools:chipIcon="@drawable/ic_logo"
+                        tools:text="test"/>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:background="@color/article_content_text"/>
+
+
+                    <tech.stoneapp.secminhr.cavern.CavernMarkdownTextView
+                        android:id="@+id/content_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:paddingLeft="16dp"
+                        android:paddingTop="8dp"
+                        android:paddingRight="16dp"
+                        android:paddingBottom="8dp"
+                        android:text=""
+                        android:textColor="@color/article_content_text"
+                        android:textSize="18sp"
+                        tools:text="content content"/>
+
+                    <View
+                        android:id="@+id/view2"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/black"/>
+
+                    <tech.stoneapp.secminhr.cavern.articlecontent.FullContentListView
+                        android:id="@+id/commentListView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+            </ScrollView>
+        </FrameLayout>
+    </LinearLayout>
+</layout>
