@@ -6,7 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="CMakeSettings">
@@ -18,12 +18,11 @@
     <list default="true" id="8fb16d08-0499-4300-969c-9ba15ce9edae" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tech/stoneapp/secminhr/cavern/editor/EditorActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/tech/stoneapp/secminhr/cavern/editor/EditorActivity.kt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -114,7 +113,7 @@
           <entry key="gitignore" value="29" />
           <entry key="gradle" value="813" />
           <entry key="java" value="753" />
-          <entry key="kt" value="79814" />
+          <entry key="kt" value="79829" />
           <entry key="pro" value="5" />
           <entry key="properties" value="113" />
           <entry key="txt" value="738" />
@@ -126,7 +125,7 @@
           <entry key="AndroidDataBinding" value="1" />
           <entry key="Groovy" value="813" />
           <entry key="JAVA" value="753" />
-          <entry key="Kotlin" value="79814" />
+          <entry key="Kotlin" value="79829" />
           <entry key="PLAIN_TEXT" value="769" />
           <entry key="ProGuard File" value="5" />
           <entry key="Properties" value="113" />
@@ -156,11 +155,11 @@
           <provider editor-type-id="android-designer2" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/tech/stoneapp/secminhr/cavern/editor/EditorActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="726">
-              <caret line="33" selection-start-line="33" selection-end-line="33" />
+            <state relative-caret-position="324">
+              <caret line="72" column="38" lean-forward="true" selection-start-line="72" selection-start-column="38" selection-end-line="72" selection-end-column="38" />
               <folding>
                 <element signature="e#46#633#0" expanded="true" />
               </folding>
@@ -187,7 +186,7 @@
           <provider editor-type-id="android-manifest" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="44">
@@ -2940,8 +2939,8 @@
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/tech/stoneapp/secminhr/cavern/activity/StartActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/tech/stoneapp/secminhr/cavern/fcmService/NotificationService.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/tech/stoneapp/secminhr/cavern/editor/EditorActivity.kt" />
         <option value="$PROJECT_DIR$/app/.gitignore" />
+        <option value="$PROJECT_DIR$/app/src/main/java/tech/stoneapp/secminhr/cavern/editor/EditorActivity.kt" />
       </list>
     </option>
   </component>
@@ -3107,7 +3106,7 @@
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="android.recentlyUsedThemes" value="NoActionBarTheme" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
-    <property name="device.picker.selection" value="FA7CM1E00319" />
+    <property name="device.picker.selection" value="Pixel_XL_API_26" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/java" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="not.eligible.for.single.variant.sync" value="true" />
@@ -3277,7 +3276,7 @@
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4992928" visible="true" weight="0.3368336" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4992928" weight="0.3368336" />
       <window_info id="Structure" order="1" sideWeight="0.5007072" side_tool="true" weight="0.3368336" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
@@ -3295,7 +3294,7 @@
       <window_info anchor="bottom" id="Build" order="7" sideWeight="0.4951535" weight="0.33946252" />
       <window_info anchor="bottom" id="Android Profiler" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5048465" side_tool="true" weight="0.6251768" />
-      <window_info anchor="bottom" id="Logcat" order="10" visible="true" weight="0.42008486" />
+      <window_info anchor="bottom" id="Logcat" order="10" weight="0.42008486" />
       <window_info anchor="bottom" id="Version Control" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="12" weight="0.32956153" />
       <window_info anchor="bottom" id="Educational.CheckDetails" order="13" show_stripe_button="false" />
@@ -3647,16 +3646,6 @@
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/tech/stoneapp/secminhr/cavern/editor/EditorActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="726">
-          <caret line="33" selection-start-line="33" selection-end-line="33" />
-          <folding>
-            <element signature="e#46#633#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/tech/stoneapp/secminhr/cavern/activity/StartActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
@@ -3695,6 +3684,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="44">
           <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/tech/stoneapp/secminhr/cavern/editor/EditorActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="72" column="38" lean-forward="true" selection-start-line="72" selection-start-column="38" selection-end-line="72" selection-end-column="38" />
+          <folding>
+            <element signature="e#46#633#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

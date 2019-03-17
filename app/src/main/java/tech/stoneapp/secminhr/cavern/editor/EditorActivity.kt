@@ -69,8 +69,10 @@ class EditorActivity : AppCompatActivity() {
         bundle.putString("title", title)
         bundle.putString("content", content)
         previewFragment.arguments = bundle
-        val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputManager.hideSoftInputFromWindow(currentFocus.windowToken, 0)
+        currentFocus?.let {
+            val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputManager.hideSoftInputFromWindow(it.windowToken, 0)
+        }
         transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left,
                 R.anim.slide_in_left, R.anim.slide_out_right)
         transaction.replace(R.id.mainEditorFrame, previewFragment)
