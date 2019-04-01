@@ -7,27 +7,18 @@ import android.util.AttributeSet
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import com.android.volley.VolleyError
-import org.commonmark.ext.autolink.AutolinkExtension
-import org.commonmark.ext.gfm.strikethrough.StrikethroughExtension
-import org.commonmark.ext.gfm.tables.TablesExtension
-import org.commonmark.parser.Parser
 import ru.noties.markwon.Markwon
-import ru.noties.markwon.SpannableBuilder
-import ru.noties.markwon.SpannableConfiguration
-import ru.noties.markwon.html.impl.MarkwonHtmlParserImpl
-import ru.noties.markwon.il.AsyncDrawableLoader
-import ru.noties.markwon.renderer.html2.MarkwonHtmlRenderer
-import ru.noties.markwon.spans.SpannableTheme
-import ru.noties.markwon.syntax.Prism4jSyntaxHighlight
-import ru.noties.markwon.syntax.Prism4jThemeDefault
-import ru.noties.markwon.tasklist.TaskListExtension
-import ru.noties.prism4j.Prism4j
+import ru.noties.markwon.ext.latex.JLatexMathPlugin
+import ru.noties.markwon.ext.strikethrough.StrikethroughPlugin
+import ru.noties.markwon.ext.tables.TablePlugin
+import ru.noties.markwon.ext.tasklist.TaskListPlugin
+import ru.noties.markwon.html.HtmlPlugin
+import ru.noties.markwon.image.ImagesPlugin
+import ru.noties.markwon.image.okhttp.OkHttpImagesPlugin
 import tech.stoneapp.secminhr.cavern.api.results.Author
-import tech.stoneapp.secminhr.cavern.articlecontent.AtUsernameSpan.AtUsernameProcessor
+import tech.stoneapp.secminhr.cavern.articlecontent.AtUsernameSpan.AtUsernamePlugin
 import tech.stoneapp.secminhr.cavern.articlecontent.AtUsernameSpan.AtUsernameVisitor
-import tech.stoneapp.secminhr.cavern.articlecontent.fontTag.FontTagHandler
-import tech.stoneapp.secminhr.cavern.articlecontent.markwonUtils.CavernGrammarLocator
-import tech.stoneapp.secminhr.cavern.articlecontent.markwonUtils.CavernSpannableFactory
+import tech.stoneapp.secminhr.cavern.articlecontent.markwonUtils.CavernPlugin
 
 class CavernMarkdownTextView: TextView {
 
@@ -62,69 +53,35 @@ class CavernMarkdownTextView: TextView {
     }
 
 
-    lateinit var theme: SpannableTheme
-    lateinit var htmlRenderer: MarkwonHtmlRenderer
-    lateinit var config: SpannableConfiguration
-    lateinit var parser: Parser
+    lateinit var parser: Markwon.Builder
 
     private fun initialize() {
-        theme = createCavernMarkdownTheme()
-        htmlRenderer = createCavernHtmlRenderer()
-        config = createCavernMarkdownConfig()
         parser = markdownBasicBuilder()
-                .customDelimiterProcessor(AtUsernameProcessor())
-                .build()
     }
 
-    private fun createCavernMarkdownTheme() =
-            SpannableTheme
-                    .builderWithDefaults(context)
-                    .headingBreakHeight(0)
-                    .build()
-
-    private fun createCavernHtmlRenderer() =
-            MarkwonHtmlRenderer
-                    .builderWithDefaults()
-                    .handler("font", FontTagHandler(resources, context.packageName))
-                    .build()
-
-    private fun createCavernMarkdownConfig() =
-            SpannableConfiguration
-                    .builder(context)
-                    .theme(theme)
-                    .factory(CavernSpannableFactory())
-                    .softBreakAddsNewLine(true)
-                    .asyncDrawableLoader(AsyncDrawableLoader.create())
-                    .htmlParser(MarkwonHtmlParserImpl.create())
-                    .htmlRenderer(htmlRenderer)
-                    .syntaxHighlight(Prism4jSyntaxHighlight.create(Prism4j(CavernGrammarLocator()), Prism4jThemeDefault.create()))
-                    .build()
-
-    private fun markdownBasicBuilder(): Parser.Builder =
-            Parser.Builder().extensions(listOf(
-                    StrikethroughExtension.create(),
-                    TablesExtension.create(),
-                    TaskListExtension.create(),
-                    AutolinkExtension.create()
-            ))
+    private fun markdownBasicBuilder(): Markwon.Builder =
+            Markwon.builder(context)
+                    .usePlugin(StrikethroughPlugin.create())
+                    .usePlugin(TablePlugin.create(context))
+                    .usePlugin(TaskListPlugin.create(context))
+                    .usePlugin(HtmlPlugin.create())
+                    .usePlugin(ImagesPlugin.create(context))
+                    .usePlugin(OkHttpImagesPlugin.create())
+                    .usePlugin(JLatexMathPlugin.create(70f))
+                    .usePlugin(CavernPlugin(resources, context))
 
     fun setMarkdown(text: String) {
-        val node = parser.parse(text)
-        val builder = SpannableBuilder()
-        val customVisitor = AtUsernameVisitor(config, context, builder)
-        onUsernameClickedListeners?.let {
-            customVisitor.addOnSuccessListener(it)
+        if(!parser.build().hasPlugin(AtUsernamePlugin::class.java)) {
+            val customVisitor = AtUsernameVisitor(context)
+            onUsernameClickedListeners?.let {
+                customVisitor.addOnSuccessListener(it)
+            }
+            errorListeners?.let {
+                customVisitor.addOnErrorListener(it)
+            }
+            parser.usePlugin(AtUsernamePlugin(customVisitor))
         }
-        errorListeners?.let {
-            customVisitor.addOnErrorListener(it)
-        }
-        node.accept(customVisitor)
-        val rendered = builder.text()
         this.movementMethod = LinkMovementMethod.getInstance()
-        Markwon.unscheduleDrawables(this)
-        Markwon.unscheduleTableRows(this)
-        this.text = rendered
-        Markwon.scheduleDrawables(this)
-        Markwon.scheduleTableRows(this)
+        parser.build().setMarkdown(this, text)
     }
 }

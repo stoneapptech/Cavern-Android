@@ -12,3 +12,12 @@ fun JSONObject.getJSONObject(config: FirebaseRemoteConfig, key: String): JSONObj
 fun JSONObject.get(config: FirebaseRemoteConfig, key: String): Any = get(config.getString(key))
 
 fun String?.isNotNullNorEmpty() = !this.isNullOrEmpty()
+
+fun IntRange.collideWith(range: IntRange): Boolean {
+    for(num in this) {
+        if(range.contains(num)) {
+            return true
+        }
+    }
+    return false
+}

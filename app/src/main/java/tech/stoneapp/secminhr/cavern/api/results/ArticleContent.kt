@@ -46,6 +46,7 @@ class ArticleContent(val id: Int, private val config: FirebaseRemoteConfig, priv
                 .replace("&gt;", ">")
                 .replace("\\/", "/")
                 .replace("&quot;", "\"")
+                .replace("&amp", "&")
         val regex = Regex("@[a-zA-z0-9]+")
         adjusted = regex.replace(adjusted) {
             it.value + "@"

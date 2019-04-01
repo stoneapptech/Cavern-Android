@@ -1,6 +1,7 @@
 package tech.stoneapp.secminhr.cavern.articlecontent
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -23,6 +24,7 @@ class ArticleContentViewModel(application: Application): AndroidViewModel(applic
         content = MutableLiveData()
         thread {
             Cavern.getInstance(getApplication()).getArticleContent(id).addOnSuccessListener {
+                Log.e("ArticleContentViewModel", it.content)
                 this.content.postValue(it)
             }.addOnFailureListener {
                 val errorMessage = when (it) {

@@ -1,5 +1,6 @@
 *.iml
 .gradle
+.idea
 /local.properties
 /.idea/caches/build_file_checksums.ser
 /.idea/libraries
@@ -25,3 +26,4 @@
 .gradle/4.10.1/taskHistory/taskHistory.lock
 .gradle/buildOutputCleanup/buildOutputCleanup.lock
 .idea/workspace.xml
+.gradle/4.10.1/fileHashes/fileHashes.bin

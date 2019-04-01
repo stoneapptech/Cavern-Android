@@ -1,5 +1,6 @@
 package tech.stoneapp.secminhr.cavern.editor
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -32,6 +33,14 @@ class EditorActivity : AppCompatActivity() {
         transaction.add(R.id.mainEditorFrame, editorFragment)
         transaction.commit()
 
+        val draft = PreferenceManager.getDefaultSharedPreferences(this).getStringSet("draft", setOf())
+        draft?.let {
+            if(it.size == 2) {
+                editorFragment.title.set(it.toList()[0])
+                editorFragment.content.set(it.toList()[1])
+            }
+        }
+
         publishFloatingButton.setOnClickListener {
             val title = editorFragment.title.get()
             val content = editorFragment.content.get()
@@ -61,6 +70,13 @@ class EditorActivity : AppCompatActivity() {
                 }
             }.execute()
         }
+
+        saveFloatingButton.setOnClickListener {
+            PreferenceManager.getDefaultSharedPreferences(this).edit {
+                putStringSet("draft", setOf(editorFragment.title.get(), editorFragment.content.get()))
+            }
+            Toast.makeText(this, "draft saved", Toast.LENGTH_SHORT).show()
+        }
     }
 
     fun onPreviewSelected(title: String, content: String) {
@@ -78,7 +94,17 @@ class EditorActivity : AppCompatActivity() {
         transaction.replace(R.id.mainEditorFrame, previewFragment)
         transaction.addToBackStack(null)
         transaction.commit()
+
+        ObjectAnimator
+                .ofFloat(publishFloatingButton, "y", publishFloatingButton.y, publishFloatingButton.y + 38)
+                .setDuration(350)
+                .start()
     }
 
-
+    override fun onPause() {
+        super.onPause()
+        PreferenceManager.getDefaultSharedPreferences(this).edit {
+            putStringSet("draft", setOf(editorFragment.title.get(), editorFragment.content.get()))
+        }
+    }
 }

@@ -3,15 +3,16 @@ package tech.stoneapp.secminhr.cavern.articlecontent.fontTag
 import android.content.res.Resources
 import android.graphics.Color
 import android.os.Build
+import ru.noties.markwon.MarkwonVisitor
 import ru.noties.markwon.SpannableBuilder
-import ru.noties.markwon.SpannableConfiguration
-import ru.noties.markwon.html.api.HtmlTag
-import ru.noties.markwon.renderer.html2.tag.TagHandler
+import ru.noties.markwon.html.HtmlTag
+import ru.noties.markwon.html.MarkwonHtmlRenderer
+import ru.noties.markwon.html.TagHandler
 
 class FontTagHandler(val resource: Resources, val packageName: String): TagHandler() {
-    override fun handle(configuration: SpannableConfiguration, builder: SpannableBuilder, tag: HtmlTag) {
+    override fun handle(visitor: MarkwonVisitor, renderer: MarkwonHtmlRenderer, tag: HtmlTag) {
         if(tag.isBlock) {
-            visitChildren(configuration, builder, tag.asBlock)
+            visitChildren(visitor, renderer, tag.asBlock)
         }
         val colorAttr = tag.attributes()["color"]
         colorAttr?.let { colorStr ->
@@ -22,7 +23,7 @@ class FontTagHandler(val resource: Resources, val packageName: String): TagHandl
                     resource.getColor(id, null)
                 } else {
                     resource.getColor(id)
-              }
+                }
             } else {
                 color = if(colorAttr.startsWith("#")) { //#RRGGCC form
                     try {
@@ -44,7 +45,7 @@ class FontTagHandler(val resource: Resources, val packageName: String): TagHandl
                     Color.BLACK
                 }
             }
-            SpannableBuilder.setSpans(builder, FontTagSpan(color),tag.start(), tag.end())
+            SpannableBuilder.setSpans(visitor.builder(), FontTagSpan(color), tag.start(), tag.end())
         }
     }
 }
