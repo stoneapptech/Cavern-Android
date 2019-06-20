@@ -14,6 +14,7 @@
 .gradle/4.10.1/fileHashes/fileHashes.lock
 .gradle/4.10.1/fileHashes/resourceHashesCache.bin
 .gradle/4.10.1/javaCompile/javaCompile.lock
+.gradle/4.10.1/javaCompile
 .gradle/4.10.1/javaCompile/taskHistory.bin
 .gradle/4.10.1/taskHistory/taskHistory.lock
 .gradle/buildOutputCleanup/buildOutputCleanup.lock
@@ -24,6 +25,7 @@
 .gradle/4.10.1/fileHashes/resourceHashesCache.bin
 .gradle/4.10.1/javaCompile/javaCompile.lock
 .gradle/4.10.1/taskHistory/taskHistory.lock
+.gradle/4.10.1/taskHistory
 .gradle/buildOutputCleanup/buildOutputCleanup.lock
 .idea/workspace.xml
 .gradle/4.10.1/fileHashes/fileHashes.bin
