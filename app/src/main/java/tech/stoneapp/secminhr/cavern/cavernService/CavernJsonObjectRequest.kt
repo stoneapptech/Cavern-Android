@@ -9,8 +9,13 @@ open class CavernJsonObjectRequest(method: Int,
                               url: String,
                               jsonRequest: JSONObject?,
                               listener: Listener<JSONObject>,
-                              errorListener: ErrorListener?):
-        JsonObjectRequest(method, url, jsonRequest, listener, errorListener) {
+                              errorListener: ErrorListener?): JsonObjectRequest(method, url, jsonRequest, listener, errorListener) {
+//
+//        private val client = OkHttpClient()
+//
+//        fun call() {
+//            Request.Builder().url(url)
+//        }
 
     override fun getHeaders() =
         super.getHeaders().plus("x-xsrf-token" to XSRFTokenGenerator.token).toMutableMap()

@@ -35,7 +35,7 @@ class EditorFragment: Fragment(), ContentHolder {
     var listNum = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = FragmentEditorBinding.inflate(inflater)
+        val binding = FragmentEditorBinding.inflate(inflater) as FragmentEditorBinding
         binding.contentHolder = this
         toolbox = Toolbox(resources, arguments!!.getString("packageName")!!)
         setHasOptionsMenu(true)

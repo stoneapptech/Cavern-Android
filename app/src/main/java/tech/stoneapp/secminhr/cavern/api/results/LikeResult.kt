@@ -5,6 +5,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response.Listener
 import com.android.volley.VolleyError
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import tech.stoneapp.secminhr.cavern.api.Cavern
 import tech.stoneapp.secminhr.cavern.api.CavernErrorListener
 import tech.stoneapp.secminhr.cavern.cavernService.CavernJsonObjectRequest
 import tech.stoneapp.secminhr.cavern.get
@@ -18,7 +19,7 @@ class LikeResult(val id: Int, private val config: FirebaseRemoteConfig, private 
     var isLiked = false
 
     override fun get(onSuccess: (LikeResult) -> Unit, onFailure: (VolleyError) -> Unit) {
-        val url = "https://stoneapp.tech/cavern/ajax/like.php?pid=$id"
+        val url = "${Cavern.host}/ajax/like.php?pid=$id"
         val request = CavernJsonObjectRequest(Request.Method.GET, url, null,
                 Listener {
                     val status = it.get(config, "status_key")

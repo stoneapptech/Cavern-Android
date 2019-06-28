@@ -7,6 +7,7 @@ import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import org.json.JSONArray
+import tech.stoneapp.secminhr.cavern.api.Cavern
 import tech.stoneapp.secminhr.cavern.api.CavernErrorListener
 import tech.stoneapp.secminhr.cavern.cavernObject.ArticlePreview
 import tech.stoneapp.secminhr.cavern.cavernService.CavernJsonObjectRequest
@@ -22,7 +23,7 @@ class Articles(private val config: FirebaseRemoteConfig, private val queue: Requ
     val articles: MutableList<ArticlePreview> = mutableListOf()
 
     override fun get(onSuccess: (Articles) -> Unit, onFailure: (VolleyError) -> Unit) {
-        val url = "https://stoneapp.tech/cavern/ajax/posts.php?page="
+        val url = "${Cavern.host}/ajax/posts.php?page="
         val request = CavernJsonObjectRequest(Request.Method.GET, "${url}1", null,
                 Response.Listener { json ->
                     val postsNumber = json.getInt(config, "total_posts_num")

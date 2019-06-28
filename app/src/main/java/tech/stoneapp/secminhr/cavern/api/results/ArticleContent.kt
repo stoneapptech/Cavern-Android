@@ -5,6 +5,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import tech.stoneapp.secminhr.cavern.api.Cavern
 import tech.stoneapp.secminhr.cavern.api.CavernErrorListener
 import tech.stoneapp.secminhr.cavern.cavernService.CavernJsonObjectRequest
 import tech.stoneapp.secminhr.cavern.getBoolean
@@ -22,7 +23,7 @@ class ArticleContent(val id: Int, private val config: FirebaseRemoteConfig, priv
     var isLiked = false
 
     override fun get(onSuccess: (ArticleContent) -> Unit, onFailure: (VolleyError) -> Unit) {
-        val url = "https://stoneapp.tech/cavern/ajax/posts.php?pid=$id"
+        val url = "${Cavern.host}/ajax/posts.php?pid=$id"
         val request = CavernJsonObjectRequest(Request.Method.GET, url, null,
                 Response.Listener { json ->
                     if(json.keys().asSequence().contains(config.getString("message_key") )) {

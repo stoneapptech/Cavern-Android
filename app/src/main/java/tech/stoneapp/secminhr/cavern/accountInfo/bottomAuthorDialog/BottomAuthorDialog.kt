@@ -26,7 +26,7 @@ class BottomAuthorDialog : BottomSheetDialogFragment, AccountInfoHolder {
     }
     lateinit var binding: FragmentBottomAuthorDialogBinding
     lateinit var viewModel: BottomAuthorDialogViewModel
-    override var account = ObservableField<Account>(Account("", "", Role.Member, "", -1))
+    override var account = ObservableField<Account>(Account("", "", Role(8, "", false, false, false), "", -1))
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

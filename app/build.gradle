@@ -46,6 +46,7 @@ android {
             includeAndroidResources = true
         }
     }
+    buildToolsVersion = '28.0.3'
 }
 
 dependencies {
@@ -81,11 +82,11 @@ dependencies {
     implementation "ru.noties.markwon:recycler-table:3.0.0"
     implementation "ru.noties.markwon:syntax-highlight:3.0.0"
     implementation "ru.noties:prism4j:1.1.0"
-    implementation 'com.google.firebase:firebase-core:16.0.8'
-    implementation 'com.google.firebase:firebase-config:16.4.1'
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.9'
-    implementation 'com.google.firebase:firebase-firestore:18.1.0'
-    implementation 'com.google.firebase:firebase-messaging:17.5.0'
+    implementation 'com.google.firebase:firebase-core:17.0.0'
+    implementation 'com.google.firebase:firebase-config:18.0.0'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+    implementation 'com.google.firebase:firebase-firestore:20.0.0'
+    implementation 'com.google.firebase:firebase-messaging:19.0.0'
     implementation 'com.android.volley:volley:1.1.1'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
@@ -95,4 +96,6 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'com.google.firebase:firebase-database:18.0.0'
+    implementation 'com.google.firebase:firebase-functions:18.0.0'
 }

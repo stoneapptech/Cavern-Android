@@ -41,9 +41,9 @@
                 android:clickable="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/ic_add_black_24dp"
+                app:srcCompat="@drawable/ic_edit_black_24dp"
                 android:focusable="true"
-                android:visibility="@{fragment.hasUserLoggedIn ? View.VISIBLE : View.GONE}"
+                android:visibility="@{fragment.userCanPost ? View.VISIBLE : View.GONE}"
                 tools:visibility="visible"/>
 
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

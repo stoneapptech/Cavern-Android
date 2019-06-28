@@ -5,9 +5,9 @@
     <string name="title_notifications">Notifications</string>
 
     <string name="title_activity_start">StartActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="update_title">New Release!!</string>
+    <string name="update_message">A new version has been released!\nUpdate the app?</string>
+    <string name="update_reject_message">App cannot run without update\nsorry for that</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

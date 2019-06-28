@@ -1,6 +1,5 @@
 package tech.stoneapp.secminhr.cavern.editor
 
-import android.animation.ObjectAnimator
 import android.content.Context
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -52,6 +51,7 @@ class EditorActivity : AppCompatActivity() {
                 Toast.makeText(this, "Content may not be empty", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            it.isEnabled = false
             Cavern.getInstance(this).publishArticle(title, content).addOnSuccessListener {
                 PreferenceManager.getDefaultSharedPreferences(application).edit {
                     putBoolean("article_outdated", true)
@@ -95,10 +95,10 @@ class EditorActivity : AppCompatActivity() {
         transaction.addToBackStack(null)
         transaction.commit()
 
-        ObjectAnimator
-                .ofFloat(publishFloatingButton, "y", publishFloatingButton.y, publishFloatingButton.y + 38)
-                .setDuration(350)
-                .start()
+//        ObjectAnimator
+//                .ofFloat(publishFloatingButton, "y", publishFloatingButton.y, publishFloatingButton.y + 38)
+//                .setDuration(350)
+//                .start()
     }
 
     override fun onPause() {

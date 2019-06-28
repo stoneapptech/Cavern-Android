@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.Observable
 import androidx.databinding.ObservableBoolean
+import androidx.databinding.ObservableField
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.article_fragment.*
 import tech.stoneapp.secminhr.cavern.activity.MainActivity
+import tech.stoneapp.secminhr.cavern.cavernObject.Account
 import tech.stoneapp.secminhr.cavern.cavernObject.ArticlePreview
 import tech.stoneapp.secminhr.cavern.databinding.ArticleFragmentBinding
 import tech.stoneapp.secminhr.cavern.editor.EditorActivity
@@ -28,6 +30,7 @@ class ArticleFragment: Fragment() {
     lateinit var viewModel: ArticleViewModel
     lateinit var adapter: ArticleListAdapter
     var contentReady = ObservableBoolean(false)
+    val userCanPost = ObservableBoolean(false)
     val hasUserLoggedIn = ObservableBoolean(false)
 
 
@@ -64,7 +67,16 @@ class ArticleFragment: Fragment() {
                 this@ArticleFragment.hasUserLoggedIn.set((sender as ObservableBoolean).get())
             }
         })
+        (activity as MainActivity).loggedUserModel.user
+                .addOnPropertyChangedCallback(object: Observable.OnPropertyChangedCallback() {
+                    override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
+                        val canPost = (sender as ObservableField<Account?>).get()?.role?.canPostArticle ?: false
+                        this@ArticleFragment.userCanPost.set(canPost)
+                    }
+                })
         hasUserLoggedIn.set((activity as MainActivity).hasUserLoggedIn.get())
+        val canPost = (activity as MainActivity).loggedUserModel.user.get()?.role?.canPostArticle ?: false
+        this.userCanPost.set(canPost)
 
         addArticleButton.setOnClickListener {
             val intent = Intent(activity, EditorActivity::class.java)

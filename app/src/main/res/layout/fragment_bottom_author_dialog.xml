@@ -203,7 +203,7 @@
                             android:layout_marginBottom="8dp"
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto"
-                            android:text="@{holder.account.role.v}"
+                            android:text="@{holder.account.role.name}"
                             android:textColor="@color/article_content_text"
                             android:textSize="14sp"
                             tools:text="permission"/>

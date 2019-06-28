@@ -5,6 +5,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response.Listener
 import com.android.volley.VolleyError
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import tech.stoneapp.secminhr.cavern.api.Cavern
 import tech.stoneapp.secminhr.cavern.api.CavernErrorListener
 import tech.stoneapp.secminhr.cavern.cavernObject.Comment
 import tech.stoneapp.secminhr.cavern.cavernService.CavernJsonObjectRequest
@@ -18,7 +19,7 @@ class Comments(private val id: Int, private val config: FirebaseRemoteConfig, pr
     val comments = mutableListOf<Comment>()
 
     override fun get(onSuccess: (Comments) -> Unit, onFailure: (VolleyError) -> Unit) {
-        val url = "https://stoneapp.tech/cavern/ajax/comment.php?pid=$id"
+        val url = "${Cavern.host}/ajax/comment.php?pid=$id"
         val request = CavernJsonObjectRequest(Request.Method.GET, url, null,
                 Listener {
                     val arr = it.getJSONArray(config, "comments_key")

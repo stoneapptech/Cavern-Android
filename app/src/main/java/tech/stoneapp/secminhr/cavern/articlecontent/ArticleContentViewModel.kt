@@ -24,7 +24,6 @@ class ArticleContentViewModel(application: Application): AndroidViewModel(applic
         content = MutableLiveData()
         thread {
             Cavern.getInstance(getApplication()).getArticleContent(id).addOnSuccessListener {
-                Log.e("ArticleContentViewModel", it.content)
                 this.content.postValue(it)
             }.addOnFailureListener {
                 val errorMessage = when (it) {

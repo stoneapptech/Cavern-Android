@@ -32,9 +32,12 @@ class CavernGrammarLocator: GrammarLocator {
     )
 
     override fun grammar(prism4j: Prism4j, language: String): Prism4j.Grammar? {
-        val cls = Class.forName("ru.noties.prism4j.languages.Prism_$language")
-        val method = cls.getMethod("create", Prism4j::class.java)
-        return method.invoke(null, prism4j) as Prism4j.Grammar
+        if(supportedLanguages.contains(language)) {
+            val cls = Class.forName("ru.noties.prism4j.languages.Prism_$language")
+            val method = cls.getMethod("create", Prism4j::class.java)
+            return method.invoke(null, prism4j) as Prism4j.Grammar
+        }
+        return null
     }
 
     override fun languages() = supportedLanguages

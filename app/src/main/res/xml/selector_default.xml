@@ -6,19 +6,19 @@
     </entry>
     <entry>
         <key>article_divs</key>
-        <value>div[data-id]</value>
+        <value>.ts.card[data-id]</value>
     </entry>
     <entry>
         <key>title</key>
-        <value>div[data-id] > div.header</value>
+        <value>.ts.card[data-id] > div.header</value>
     </entry>
     <entry>
         <key>author</key>
-        <value>div[data-id] > div.middoted.meta > a</value>
+        <value>.ts.card[data-id] > div.middoted.meta > a</value>
     </entry>
     <entry>
         <key>date</key>
-        <value>div[data-id] > div.middoted.mate > span</value>
+        <value>.ts.card[data-id] > div.middoted.mate > span</value>
     </entry>
     <entry>
         <key>content</key>
@@ -26,7 +26,7 @@
     </entry>
     <entry>
         <key>likes</key>
-        <value>div[data-id] > ts.icon.like.button</value>
+        <value>button.ts.icon.like.button</value>
     </entry>
     <entry>
         <key>login</key>
@@ -106,7 +106,7 @@
     </entry>
     <entry>
         <key>role_key</key>
-        <value>role</value>
+        <value>level</value>
     </entry>
     <entry>
         <key>posts_count_key</key>

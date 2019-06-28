@@ -14,7 +14,6 @@ import tech.stoneapp.secminhr.cavern.cavernObject.Account
 
 class LoginViewModel(application: Application): AndroidViewModel(application) {
     var loggedUser: MutableLiveData<Account> = MutableLiveData()
-//    private val requestQueue = getApplication<CavernApplication>().requestQueue
 
     fun loginWithSession(): LiveData<Account> {
         loggedUser = MutableLiveData()

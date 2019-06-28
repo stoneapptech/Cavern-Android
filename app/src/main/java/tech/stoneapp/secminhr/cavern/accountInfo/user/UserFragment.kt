@@ -18,7 +18,7 @@ import tech.stoneapp.secminhr.cavern.databinding.FragmentBottomAuthorDialogBindi
 class UserFragment : Fragment(), AccountInfoHolder {
 
     private lateinit var viewModel: UserViewModel
-    override val account = ObservableField<Account>(Account("", "", Role.Member, "", -1))
+    override val account = ObservableField<Account>(Account("", "", Role(8, "", false, false, false), "", -1))
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

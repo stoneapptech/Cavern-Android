@@ -6,8 +6,6 @@
         <variable
             name="articlePreview"
             type="tech.stoneapp.secminhr.cavern.cavernObject.ArticlePreview" />
-        <import type="java.text.SimpleDateFormat" />
-        <import type="java.lang.Integer" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -47,9 +47,15 @@ class Cavern private constructor(private val requestQueue: RequestQueue) {
         return CavernTask(PublishArticle(title, content, requestQueue))
     }
 
+    fun getRoleDetail(level: Int): CavernTask<RoleDetail> {
+        return CavernTask(RoleDetail(level))
+    }
+
     companion object {
         private var instance: Cavern? = null
         fun getInstance(context: Context) =
                 instance ?: Cavern(Volley.newRequestQueue(context)).also { instance = it }
+
+        val host = "https://stoneapp.tech/cavern"
     }
 }
