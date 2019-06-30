@@ -25,3 +25,13 @@
 -dontwarn okhttp3.internal.platform.ConscryptPlatform
 
 -dontwarn com.caverock.androidsvg.**
+
+-keep public class * extends tech.stoneapp.secminhr.cavern.editor.tools.EditorTool
+-keepclassmembers class * extends tech.stoneapp.secminhr.cavern.editor.tools.EditorTool {
+ public <init>(int);
+}
+-keepnames public class ru.noties.prism4j.Prism4j
+-keep public class ru.noties.prism4j.languages.*
+-keepclassmembers class ru.noties.prism4j.languages.* {
+ public static *** create(***);
+}

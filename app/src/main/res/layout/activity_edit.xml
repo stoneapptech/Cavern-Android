@@ -24,6 +24,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="16dp"
         android:clickable="true"
+        android:focusable="true"
         app:backgroundTint="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/publishFloatingButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,4 +38,5 @@
         tools:layout_editor_absoluteY="0dp">
 
     </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

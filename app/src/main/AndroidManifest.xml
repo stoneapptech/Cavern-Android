@@ -22,7 +22,7 @@
 
         <activity
             android:name=".editor.EditorActivity"
-            android:theme="@style/NoActionBarMaterialTheme">
+            android:theme="@style/NoActionBarAppCompatTheme">
         </activity>
 
         <meta-data
