@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import stoneapp.secminhr.cavern.cavernObject.ArticlePreview
 import tech.stoneapp.secminhr.cavern.R
-import tech.stoneapp.secminhr.cavern.cavernObject.ArticlePreview
 import tech.stoneapp.secminhr.cavern.databinding.ArticleListItemBinding
 
 class ArticleListAdapter(val array: ArrayList<ArticlePreview>, val likeListener: (View, ArticlePreview) -> Unit):

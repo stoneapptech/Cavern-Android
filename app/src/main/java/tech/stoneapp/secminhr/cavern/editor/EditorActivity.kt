@@ -3,17 +3,17 @@ package tech.stoneapp.secminhr.cavern.editor
 import android.content.Context
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
-import com.android.volley.AuthFailureError
-import com.android.volley.NetworkError
-import com.android.volley.NoConnectionError
 import kotlinx.android.synthetic.main.activity_edit.*
+import stoneapp.secminhr.cavern.api.Cavern
+import stoneapp.secminhr.cavern.cavernError.NetworkError
+import stoneapp.secminhr.cavern.cavernError.NoConnectionError
+import stoneapp.secminhr.cavern.cavernError.NoLoginError
 import tech.stoneapp.secminhr.cavern.R
-import tech.stoneapp.secminhr.cavern.api.Cavern
-import tech.stoneapp.secminhr.cavern.api.results.LikeResult
 
 
 class EditorActivity : AppCompatActivity() {
@@ -32,13 +32,13 @@ class EditorActivity : AppCompatActivity() {
         transaction.add(R.id.mainEditorFrame, editorFragment)
         transaction.commit()
 
-        val draft = PreferenceManager.getDefaultSharedPreferences(this).getStringSet("draft", setOf())
-        draft?.let {
-            if(it.size == 2) {
-                editorFragment.title.set(it.toList()[0])
-                editorFragment.content.set(it.toList()[1])
-            }
+        val manager = PreferenceManager.getDefaultSharedPreferences(this)
+        var title = manager.getString("title", "(Untitled)")
+        if(title.isEmpty()) {
+            title = "(Untitled)"
         }
+        editorFragment.title.set(title)
+        editorFragment.content.set(manager.getString("content", ""))
 
         publishFloatingButton.setOnClickListener {
             val title = editorFragment.title.get()
@@ -61,19 +61,20 @@ class EditorActivity : AppCompatActivity() {
                 val errorMessage = when(it) {
                     is NetworkError -> "There's something wrong with the server\nPlease try again later"
                     is NoConnectionError -> "Your device seems to be offline\nPlease turn on the internet connection and try again"
-                    is LikeResult.NoLoginError -> null
-                    is AuthFailureError -> null //hasn't logged in
+                    is NoLoginError -> null
                     else -> "Some unexpected error happened\nPlease turn off the app and try again later\nWe are sorry for that"
                 }
                 errorMessage?.let {
-                    Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+                    Log.e("Editor", "toast:${it}")
+                    Toast.makeText(this, "Editor: ${it}", Toast.LENGTH_SHORT).show()
                 }
             }.execute()
         }
 
         saveFloatingButton.setOnClickListener {
             PreferenceManager.getDefaultSharedPreferences(this).edit {
-                putStringSet("draft", setOf(editorFragment.title.get(), editorFragment.content.get()))
+                putString("title", editorFragment.title.get())
+                putString("content", editorFragment.content.get())
             }
             Toast.makeText(this, "draft saved", Toast.LENGTH_SHORT).show()
         }
@@ -103,8 +104,11 @@ class EditorActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
+        val title = editorFragment.title.get()
+        val content = editorFragment.content.get()
         PreferenceManager.getDefaultSharedPreferences(this).edit {
-            putStringSet("draft", setOf(editorFragment.title.get(), editorFragment.content.get()))
+            putString("title", title)
+            putString("content", content)
         }
     }
 }

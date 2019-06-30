@@ -2,7 +2,7 @@ package tech.stoneapp.secminhr.cavern.editor.tools
 
 import android.util.Log
 import android.widget.ImageView
-import tech.stoneapp.secminhr.cavern.isNotNullNorEmpty
+import stoneapp.secminhr.cavern.isNotNullNorEmpty
 
 class Link(icon: Int): EditorTool(icon) {
     var title: String? = null

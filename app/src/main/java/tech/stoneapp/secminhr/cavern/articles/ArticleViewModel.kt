@@ -7,12 +7,11 @@ import androidx.core.content.edit
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.android.volley.AuthFailureError
-import com.android.volley.NetworkError
-import com.android.volley.NoConnectionError
-import tech.stoneapp.secminhr.cavern.api.Cavern
-import tech.stoneapp.secminhr.cavern.api.results.LikeResult
-import tech.stoneapp.secminhr.cavern.cavernObject.ArticlePreview
+import stoneapp.secminhr.cavern.api.Cavern
+import stoneapp.secminhr.cavern.cavernError.NetworkError
+import stoneapp.secminhr.cavern.cavernError.NoConnectionError
+import stoneapp.secminhr.cavern.cavernError.NoLoginError
+import stoneapp.secminhr.cavern.cavernObject.ArticlePreview
 
 class ArticleViewModel(application: Application): AndroidViewModel(application) {
     private var articles: MutableLiveData<Array<ArticlePreview>> = MutableLiveData()
@@ -30,7 +29,6 @@ class ArticleViewModel(application: Application): AndroidViewModel(application) 
                 }
                 articles.postValue(it.articles.toTypedArray())
             }.addOnFailureListener {
-                it.printStackTrace()
                 val errorMessage = when(it) {
                     is NetworkError -> "There's something wrong with the server\nPlease try again later"
                     is NoConnectionError -> "Your device seems to be offline\nPlease turn on the internet connection and try again"
@@ -52,13 +50,10 @@ class ArticleViewModel(application: Application): AndroidViewModel(application) 
             val errorMessage = when(it) {
                 is NetworkError -> "There's something wrong with the server\nPlease try again later"
                 is NoConnectionError -> "Your device seems to be offline\nPlease turn on the internet connection and try again"
-                is LikeResult.NoLoginError -> null
-                is AuthFailureError -> "You haven't logged in\nPlease login first"
+                is NoLoginError -> "You haven't logged in\nPlease login first"
                 else -> "Some unexpected error happened\nPlease turn off the app and try again later\nWe are sorry for that"
             }
-            errorMessage?.let {
-                errorHandler(it)
-            }
+            errorHandler(errorMessage)
         }.execute()
     }
 }

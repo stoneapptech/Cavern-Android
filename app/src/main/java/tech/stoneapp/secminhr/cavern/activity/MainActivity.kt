@@ -10,8 +10,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import kotlinx.android.synthetic.main.activity_main.*
+import stoneapp.secminhr.cavern.api.Cavern
 import tech.stoneapp.secminhr.cavern.R
-import tech.stoneapp.secminhr.cavern.api.Cavern
 import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity(), LoggedUserModelHolder {

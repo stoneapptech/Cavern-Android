@@ -15,11 +15,11 @@ import ru.noties.markwon.html.MarkwonHtmlRenderer
 import ru.noties.markwon.syntax.Prism4jSyntaxHighlight
 import ru.noties.markwon.syntax.Prism4jThemeDefault
 import ru.noties.prism4j.Prism4j
+import stoneapp.secminhr.cavern.collideWith
 import tech.stoneapp.secminhr.cavern.articlecontent.AtUsernameSpan.AtUsernameNode
 import tech.stoneapp.secminhr.cavern.articlecontent.AtUsernameSpan.AtUsernameProcessor
 import tech.stoneapp.secminhr.cavern.articlecontent.AtUsernameSpan.AtUsernameVisitor
 import tech.stoneapp.secminhr.cavern.articlecontent.fontTag.FontTagHandler
-import tech.stoneapp.secminhr.cavern.collideWith
 import java.util.*
 
 class CavernPlugin(val resources: Resources, val context: Context): AbstractMarkwonPlugin() {

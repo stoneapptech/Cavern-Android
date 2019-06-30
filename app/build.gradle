@@ -13,8 +13,8 @@ android {
         applicationId "tech.stoneapp.secminhr.cavern"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 5
-        versionName "3.0.1"
+        versionCode 6
+        versionName "3.1.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
@@ -66,10 +66,9 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
-    implementation 'org.jsoup:jsoup:1.11.3'
     implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0"
     implementation "android.arch.navigation:navigation-ui-ktx:1.0.0"
-    implementation 'androidx.core:core-ktx:1.0.1'
+    implementation 'androidx.core:core-ktx:1.0.2'
     implementation "ru.noties.markwon:core:3.0.0"
     implementation "ru.noties.markwon:ext-latex:3.0.0"
     implementation "ru.noties.markwon:ext-strikethrough:3.0.0"
@@ -88,15 +87,11 @@ dependencies {
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
     implementation 'com.google.firebase:firebase-firestore:20.0.0'
     implementation 'com.google.firebase:firebase-messaging:19.0.0'
-    implementation 'com.android.volley:volley:1.1.1'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
-    implementation "androidx.room:room-runtime:2.1.0-alpha06"
-    kapt "androidx.room:room-compiler:2.1.0-alpha06"
     implementation "com.atlassian.commonmark:commonmark-ext-autolink:0.12.1"
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation 'com.google.firebase:firebase-database:18.0.0'
-    implementation 'com.google.firebase:firebase-functions:18.0.0'
+    implementation project(":cavern")
 }

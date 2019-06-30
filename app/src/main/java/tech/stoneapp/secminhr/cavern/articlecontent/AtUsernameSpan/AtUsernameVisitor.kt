@@ -1,13 +1,13 @@
 package tech.stoneapp.secminhr.cavern.articlecontent.AtUsernameSpan
 
 import android.content.Context
-import com.android.volley.VolleyError
 import ru.noties.markwon.MarkwonVisitor
-import tech.stoneapp.secminhr.cavern.api.results.Author
+import stoneapp.secminhr.cavern.api.results.Author
+import stoneapp.secminhr.cavern.cavernError.CavernError
 
 class AtUsernameVisitor(val context: Context,
                         onSuccess: ((Author) -> Unit)? = null,
-                        errorHandler: ((VolleyError) -> Unit)? = null):
+                        errorHandler: ((CavernError) -> Unit)? = null):
         MarkwonVisitor.NodeVisitor<AtUsernameNode> {
 
     override fun visit(visitor: MarkwonVisitor, node: AtUsernameNode) {
@@ -25,7 +25,7 @@ class AtUsernameVisitor(val context: Context,
     }
 
     val successListeners = mutableListOf<(Author) -> Unit>()
-    val errorListeners = mutableListOf<(VolleyError) -> Unit>()
+    val errorListeners = mutableListOf<(CavernError) -> Unit>()
 
     init {
         onSuccess?.let {
@@ -41,7 +41,7 @@ class AtUsernameVisitor(val context: Context,
         return this
     }
 
-    fun addOnErrorListener(listener: (VolleyError) -> Unit): AtUsernameVisitor {
+    fun addOnErrorListener(listener: (CavernError) -> Unit): AtUsernameVisitor {
         errorListeners += listener
         return this
     }

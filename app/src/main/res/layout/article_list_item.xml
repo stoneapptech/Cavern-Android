@@ -5,7 +5,7 @@
     <data>
         <variable
             name="articlePreview"
-            type="tech.stoneapp.secminhr.cavern.cavernObject.ArticlePreview" />
+            type="stoneapp.secminhr.cavern.cavernObject.ArticlePreview" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

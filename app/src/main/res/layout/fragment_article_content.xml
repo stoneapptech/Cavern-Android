@@ -6,7 +6,7 @@
     <data>
         <variable
             name="article"
-            type="tech.stoneapp.secminhr.cavern.api.results.ArticleContent" />
+            type="stoneapp.secminhr.cavern.api.results.ArticleContent" />
     </data>
 
     <LinearLayout

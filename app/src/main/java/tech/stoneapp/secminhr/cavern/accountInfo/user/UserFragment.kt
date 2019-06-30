@@ -8,11 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_bottom_author_dialog.*
+import stoneapp.secminhr.cavern.cavernObject.Account
+import stoneapp.secminhr.cavern.cavernObject.Role
 import tech.stoneapp.secminhr.cavern.R
 import tech.stoneapp.secminhr.cavern.accountInfo.AccountInfoHolder
 import tech.stoneapp.secminhr.cavern.activity.LoggedUserModelHolder
-import tech.stoneapp.secminhr.cavern.cavernObject.Account
-import tech.stoneapp.secminhr.cavern.cavernObject.Role
 import tech.stoneapp.secminhr.cavern.databinding.FragmentBottomAuthorDialogBinding
 
 class UserFragment : Fragment(), AccountInfoHolder {

@@ -3,17 +3,17 @@ package tech.stoneapp.secminhr.cavern.articlecontent.AtUsernameSpan
 import android.content.Context
 import android.text.style.URLSpan
 import android.view.View
-import com.android.volley.VolleyError
-import tech.stoneapp.secminhr.cavern.api.Cavern
-import tech.stoneapp.secminhr.cavern.api.results.Author
+import stoneapp.secminhr.cavern.api.Cavern
+import stoneapp.secminhr.cavern.api.results.Author
+import stoneapp.secminhr.cavern.cavernError.CavernError
 
 class AtUsernameSpan(val username: String,
                      private val context: Context,
                      successListener: ((Author) -> Unit)? = null,
-                     errorListener: ((VolleyError) -> Unit)? = null): URLSpan(username) {
+                     errorListener: ((CavernError) -> Unit)? = null): URLSpan(username) {
 
     private val successListeners = mutableListOf<(Author) -> Unit>()
-    private val errorListeners = mutableListOf<(VolleyError) -> Unit>()
+    private val errorListeners = mutableListOf<(CavernError) -> Unit>()
 
     init {
         successListener?.let {
@@ -29,7 +29,7 @@ class AtUsernameSpan(val username: String,
         return this
     }
 
-    fun addErrorListener(listener: (VolleyError) -> Unit): AtUsernameSpan {
+    fun addErrorListener(listener: (CavernError) -> Unit): AtUsernameSpan {
         errorListeners += listener
         return this
     }

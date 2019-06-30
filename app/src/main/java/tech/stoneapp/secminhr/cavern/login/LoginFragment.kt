@@ -11,9 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.login_fragment.*
+import stoneapp.secminhr.cavern.cavernError.EmptyPasswordError
+import stoneapp.secminhr.cavern.cavernError.EmptyUsernameError
+import stoneapp.secminhr.cavern.cavernObject.Account
 import tech.stoneapp.secminhr.cavern.activity.LoggedUserModelHolder
-import tech.stoneapp.secminhr.cavern.api.results.User
-import tech.stoneapp.secminhr.cavern.cavernObject.Account
 import tech.stoneapp.secminhr.cavern.databinding.LoginFragmentBinding
 
 class LoginFragment: Fragment() {
@@ -56,10 +57,10 @@ class LoginFragment: Fragment() {
             }.observe(this, Observer {
                 showAccountPage(it, activity as LoggedUserModelHolder)
             })
-        } catch (e: User.EmptyUsernameException) {
+        } catch (e: EmptyUsernameError) {
             usernameInput.error = e.message
             isLoggingIn.set(false)
-        } catch (e: User.EmptyPasswordException) {
+        } catch (e: EmptyPasswordError) {
             passwordInput.error = e.message
             isLoggingIn.set(false)
         }

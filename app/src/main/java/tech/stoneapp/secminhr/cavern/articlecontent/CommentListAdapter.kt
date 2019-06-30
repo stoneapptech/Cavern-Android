@@ -9,12 +9,13 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import com.android.volley.NetworkError
-import com.android.volley.NoConnectionError
 import com.squareup.picasso.Picasso
+import stoneapp.secminhr.cavern.cavernError.NetworkError
+import stoneapp.secminhr.cavern.cavernError.NoConnectionError
+import stoneapp.secminhr.cavern.cavernError.NotExistsError
+import stoneapp.secminhr.cavern.cavernObject.Comment
 import tech.stoneapp.secminhr.cavern.CavernMarkdownTextView
 import tech.stoneapp.secminhr.cavern.R
-import tech.stoneapp.secminhr.cavern.cavernObject.Comment
 import tech.stoneapp.secminhr.cavern.databinding.CommentsItemBinding
 
 class CommentListAdapter(context: Context,
@@ -38,10 +39,8 @@ class CommentListAdapter(context: Context,
             var errorMessage = when (it) {
                 is NetworkError -> "There's something wrong with the server\nPlease try again later"
                 is NoConnectionError -> "Your device seems to be offline\nPlease turn on the internet connection and try again"
+                is NotExistsError -> "Author doesn't exist"
                 else -> "Some unexpected error happened\nPlease turn off the app and try again later\nWe are sorry for that"
-            }
-            if (it.networkResponse.statusCode == 404) {
-                errorMessage = "Author doesn't exist"
             }
             Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
         }

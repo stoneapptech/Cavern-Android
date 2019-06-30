@@ -1,38 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <defaultsMap>
     <entry>
-        <key>page_options</key>
-        <value>option</value>
-    </entry>
-    <entry>
-        <key>article_divs</key>
-        <value>.ts.card[data-id]</value>
-    </entry>
-    <entry>
-        <key>title</key>
-        <value>.ts.card[data-id] > div.header</value>
-    </entry>
-    <entry>
-        <key>author</key>
-        <value>.ts.card[data-id] > div.middoted.meta > a</value>
-    </entry>
-    <entry>
-        <key>date</key>
-        <value>.ts.card[data-id] > div.middoted.mate > span</value>
-    </entry>
-    <entry>
-        <key>content</key>
-        <value>div.markdown</value>
-    </entry>
-    <entry>
-        <key>likes</key>
-        <value>button.ts.icon.like.button</value>
-    </entry>
-    <entry>
-        <key>login</key>
-        <value>button.login.button</value>
-    </entry>
-    <entry>
         <key>title_key</key>
         <value>title</value>
     </entry>
@@ -83,14 +51,6 @@
     <entry>
         <key>message_key</key>
         <value>message</value>
-    </entry>
-    <entry>
-        <key>account_image</key>
-        <value>h3 > img</value>
-    </entry>
-    <entry>
-        <key>account_info</key>
-        <value>form > div > div > input</value>
     </entry>
     <entry>
         <key>email_key</key>

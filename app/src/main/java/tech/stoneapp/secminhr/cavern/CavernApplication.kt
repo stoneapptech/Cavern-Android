@@ -1,7 +1,7 @@
 package tech.stoneapp.secminhr.cavern
 
 import androidx.multidex.MultiDexApplication
-import tech.stoneapp.secminhr.cavern.cavernService.CavernCookieStore
+import stoneapp.secminhr.cavern.cavernService.CavernCookieStore
 import java.net.CookieHandler
 import java.net.CookieManager
 import java.net.CookiePolicy

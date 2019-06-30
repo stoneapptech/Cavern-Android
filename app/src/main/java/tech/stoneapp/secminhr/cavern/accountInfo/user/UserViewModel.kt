@@ -2,14 +2,12 @@ package tech.stoneapp.secminhr.cavern.accountInfo.user
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import com.android.volley.NetworkError
-import com.android.volley.NoConnectionError
-import tech.stoneapp.secminhr.cavern.api.Cavern
-import tech.stoneapp.secminhr.cavern.api.results.LogoutResult
+import stoneapp.secminhr.cavern.api.Cavern
+import stoneapp.secminhr.cavern.cavernError.LogoutFailedError
+import stoneapp.secminhr.cavern.cavernError.NetworkError
+import stoneapp.secminhr.cavern.cavernError.NoConnectionError
 
 class UserViewModel(application: Application) : AndroidViewModel(application) {
-
-//    val requestQueue: RequestQueue = getApplication<CavernApplication>().requestQueue
 
     fun logout(errorHandler: (String) -> Unit, onSuccess: () -> Unit) {
         Cavern.getInstance(getApplication()).logout().addOnSuccessListener {
@@ -22,14 +20,16 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
                 is NoConnectionError -> {
                     "Your device seems to be offline\nPlease turn on the internet connection and try again"
                 }
-                is LogoutResult.LogoutFailedException -> {
-                    it.message!!
+                is LogoutFailedError -> {
+                    it.message
                 }
                 else -> {
                     "Some unexpected error happened\nPlease turn off the app and try again later\nWe are sorry for that"
                 }
             }
-            errorHandler(errorMessage)
+            errorMessage?.let {
+                errorHandler(it)
+            }
         }.execute()
     }
 }

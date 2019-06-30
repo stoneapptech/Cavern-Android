@@ -2,6 +2,7 @@ package tech.stoneapp.secminhr.cavern.articles
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,9 +19,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.article_fragment.*
+import stoneapp.secminhr.cavern.cavernObject.Account
+import stoneapp.secminhr.cavern.cavernObject.ArticlePreview
 import tech.stoneapp.secminhr.cavern.activity.MainActivity
-import tech.stoneapp.secminhr.cavern.cavernObject.Account
-import tech.stoneapp.secminhr.cavern.cavernObject.ArticlePreview
 import tech.stoneapp.secminhr.cavern.databinding.ArticleFragmentBinding
 import tech.stoneapp.secminhr.cavern.editor.EditorActivity
 import tech.stoneapp.secminhr.cavern.editor.tools.Header1
@@ -40,14 +41,16 @@ class ArticleFragment: Fragment() {
         refreshLayout.setColorSchemeResources(tech.stoneapp.secminhr.cavern.R.color.colorPrimary, tech.stoneapp.secminhr.cavern.R.color.colorPrimaryDark, tech.stoneapp.secminhr.cavern.R.color.colorAccent)
         refreshLayout.setOnRefreshListener {
             viewModel.getArticles(true) {
+                Log.e("Article", "Toast: ${it}")
                 activity!!.runOnUiThread {
-                    Toast.makeText(this.context, it, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this.context, "Article\n${it}", Toast.LENGTH_SHORT).show()
                 }
             }.observe(this, Observer<Array<ArticlePreview>> { arr ->
                 //arr will once cleanup to null before request
                 //thus don't need to do anything if receive null
                 arr?.let {
                     if (it.isEmpty()) {
+                        Log.e("Article", "get empty articles")
                         Toast.makeText(activity, "something is wrong with connection", Toast.LENGTH_SHORT).show()
                     } else {
                         viewModel.firstVisible = 0

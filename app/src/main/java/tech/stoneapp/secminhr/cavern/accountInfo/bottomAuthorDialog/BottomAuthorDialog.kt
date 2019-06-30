@@ -12,9 +12,9 @@ import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_bottom_author_dialog.*
+import stoneapp.secminhr.cavern.cavernObject.Account
+import stoneapp.secminhr.cavern.cavernObject.Role
 import tech.stoneapp.secminhr.cavern.accountInfo.AccountInfoHolder
-import tech.stoneapp.secminhr.cavern.cavernObject.Account
-import tech.stoneapp.secminhr.cavern.cavernObject.Role
 import tech.stoneapp.secminhr.cavern.databinding.FragmentBottomAuthorDialogBinding
 
 @SuppressLint("ValidFragment")

@@ -1,6 +1,5 @@
 package tech.stoneapp.secminhr.cavern.articlecontent.fontTag
 
-import android.graphics.Color
 import android.text.TextPaint
 import android.text.style.MetricAffectingSpan
 

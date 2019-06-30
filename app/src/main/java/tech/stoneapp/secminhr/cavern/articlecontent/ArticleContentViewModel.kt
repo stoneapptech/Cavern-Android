@@ -1,18 +1,17 @@
 package tech.stoneapp.secminhr.cavern.articlecontent
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.android.volley.AuthFailureError
-import com.android.volley.NetworkError
-import com.android.volley.NoConnectionError
-import tech.stoneapp.secminhr.cavern.api.Cavern
-import tech.stoneapp.secminhr.cavern.api.results.ArticleContent
-import tech.stoneapp.secminhr.cavern.api.results.LikeResult
-import tech.stoneapp.secminhr.cavern.cavernObject.Account
-import tech.stoneapp.secminhr.cavern.cavernObject.Comment
+import stoneapp.secminhr.cavern.api.Cavern
+import stoneapp.secminhr.cavern.api.results.ArticleContent
+import stoneapp.secminhr.cavern.cavernError.NetworkError
+import stoneapp.secminhr.cavern.cavernError.NoConnectionError
+import stoneapp.secminhr.cavern.cavernError.NoLoginError
+import stoneapp.secminhr.cavern.cavernError.NotExistsError
+import stoneapp.secminhr.cavern.cavernObject.Account
+import stoneapp.secminhr.cavern.cavernObject.Comment
 import kotlin.concurrent.thread
 
 class ArticleContentViewModel(application: Application): AndroidViewModel(application) {
@@ -29,7 +28,7 @@ class ArticleContentViewModel(application: Application): AndroidViewModel(applic
                 val errorMessage = when (it) {
                     is NetworkError -> "There's something wrong with the server\nPlease try again later"
                     is NoConnectionError -> "Your device seems to be offline\nPlease turn on the internet connection and try again"
-                    is ArticleContent.ContentNotExistsError -> "Content not available"
+                    is NotExistsError -> "Content not available"
                     else -> "Some unexpected error happened\nPlease turn off the app and try again later\nWe are sorry for that"
                 }
                 errorHandler(errorMessage)
@@ -43,13 +42,11 @@ class ArticleContentViewModel(application: Application): AndroidViewModel(applic
         Cavern.getInstance(getApplication()).getAuthor(username).addOnSuccessListener {
             author.postValue(it.account)
         }.addOnFailureListener {
-            var errorMessage = when(it) {
+            val errorMessage = when(it) {
                 is NetworkError -> "There's something wrong with the server\nPlease try again later"
                 is NoConnectionError -> "Your device seems to be offline\nPlease turn on the internet connection and try again"
+                is NotExistsError -> "Author doesn't dxist"
                 else -> "Some unexpected error happened\nPlease turn off the app and try again later\nWe are sorry for that"
-            }
-            if(it.networkResponse.statusCode == 404) {
-                errorMessage = "Author doesn't exist"
             }
             errorHandler(errorMessage)
         }.execute()
@@ -81,8 +78,7 @@ class ArticleContentViewModel(application: Application): AndroidViewModel(applic
                 val errorMessage = when (it) {
                     is NetworkError -> "There's something wrong with the server\nPlease try again later"
                     is NoConnectionError -> "Your device seems to be offline\nPlease turn on the internet connection and try again"
-                    is LikeResult.NoLoginError -> null
-                    is AuthFailureError -> null //hasn't logged in
+                    is NoLoginError -> null
                     else -> "Some unexpected error happened\nPlease turn off the app and try again later\nWe are sorry for that"
                 }
                 errorMessage?.let {

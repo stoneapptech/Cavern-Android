@@ -6,7 +6,6 @@ import android.text.method.LinkMovementMethod
 import android.util.AttributeSet
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import com.android.volley.VolleyError
 import ru.noties.markwon.Markwon
 import ru.noties.markwon.ext.latex.JLatexMathPlugin
 import ru.noties.markwon.ext.strikethrough.StrikethroughPlugin
@@ -15,7 +14,8 @@ import ru.noties.markwon.ext.tasklist.TaskListPlugin
 import ru.noties.markwon.html.HtmlPlugin
 import ru.noties.markwon.image.ImagesPlugin
 import ru.noties.markwon.image.okhttp.OkHttpImagesPlugin
-import tech.stoneapp.secminhr.cavern.api.results.Author
+import stoneapp.secminhr.cavern.api.results.Author
+import stoneapp.secminhr.cavern.cavernError.CavernError
 import tech.stoneapp.secminhr.cavern.articlecontent.AtUsernameSpan.AtUsernamePlugin
 import tech.stoneapp.secminhr.cavern.articlecontent.AtUsernameSpan.AtUsernameVisitor
 import tech.stoneapp.secminhr.cavern.articlecontent.markwonUtils.CavernPlugin
@@ -40,14 +40,14 @@ class CavernMarkdownTextView: TextView {
     }
 
     private var onUsernameClickedListeners: ((Author) -> Unit)? = null
-    private var errorListeners: ((VolleyError) -> Unit)? = null
+    private var errorListeners: ((CavernError) -> Unit)? = null
 
     fun addOnUsernameClickedListener(listener: (Author) -> Unit): CavernMarkdownTextView {
         onUsernameClickedListeners = listener
         return this
     }
 
-    fun addErrorListener(listener: (VolleyError) -> Unit): CavernMarkdownTextView {
+    fun addErrorListener(listener: (CavernError) -> Unit): CavernMarkdownTextView {
         errorListeners = listener
         return this
     }

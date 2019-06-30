@@ -10,9 +10,10 @@ import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.android.volley.NetworkError
-import com.android.volley.NoConnectionError
 import kotlinx.android.synthetic.main.fragment_article_content.*
+import stoneapp.secminhr.cavern.cavernError.NetworkError
+import stoneapp.secminhr.cavern.cavernError.NoConnectionError
+import stoneapp.secminhr.cavern.cavernError.NotExistsError
 import tech.stoneapp.secminhr.cavern.R
 import tech.stoneapp.secminhr.cavern.accountInfo.bottomAuthorDialog.BottomAuthorDialog
 import tech.stoneapp.secminhr.cavern.databinding.FragmentArticleContentBinding
@@ -45,13 +46,11 @@ class ArticleContentFragment : Fragment() {
                 content_text.addOnUsernameClickedListener {
                     showUserDialog(it.username)
                 }.addErrorListener {
-                    var errorMessage = when (it) {
+                    val errorMessage = when (it) {
                         is NetworkError -> "There's something wrong with the server\nPlease try again later"
                         is NoConnectionError -> "Your device seems to be offline\nPlease turn on the internet connection and try again"
+                        is NotExistsError -> "Author doesn't exist"
                         else -> "Some unexpected error happened\nPlease turn off the app and try again later\nWe are sorry for that"
-                    }
-                    if (it.networkResponse.statusCode == 404) {
-                        errorMessage = "Author doesn't exist"
                     }
                     Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
                 }

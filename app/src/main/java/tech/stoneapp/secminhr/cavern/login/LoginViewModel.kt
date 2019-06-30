@@ -4,11 +4,9 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.android.volley.NetworkError
-import com.android.volley.NoConnectionError
-import tech.stoneapp.secminhr.cavern.api.Cavern
-import tech.stoneapp.secminhr.cavern.api.results.User
-import tech.stoneapp.secminhr.cavern.cavernObject.Account
+import stoneapp.secminhr.cavern.api.Cavern
+import stoneapp.secminhr.cavern.cavernError.*
+import stoneapp.secminhr.cavern.cavernObject.Account
 
 
 
@@ -35,11 +33,14 @@ class LoginViewModel(application: Application): AndroidViewModel(application) {
                 is NoConnectionError -> {
                     errorMessage = "Your device seems to be offline\nPlease turn on the internet connection and try again"
                 }
-                is User.EmptyUsernameException -> {
+                is EmptyUsernameError -> {
                     throw it
                 }
-                is User.EmptyPasswordException -> {
+                is EmptyPasswordError -> {
                     throw it
+                }
+                is WrongCredentialError -> {
+                    errorMessage = "Either your username or password is wrong\nPlease check again"
                 }
                 else -> {
                     errorMessage = "Some unexpected error happened\nPlease turn off the app and try again later\nWe are sorry for that"

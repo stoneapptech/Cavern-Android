@@ -1,7 +1,7 @@
 package tech.stoneapp.secminhr.cavern.editor.tools
 
 import android.widget.ImageView
-import tech.stoneapp.secminhr.cavern.isNotNullNorEmpty
+import stoneapp.secminhr.cavern.isNotNullNorEmpty
 
 class Photo(icon: Int): EditorTool(icon) {
     
