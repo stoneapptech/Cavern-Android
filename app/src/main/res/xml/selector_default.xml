@@ -104,4 +104,8 @@
         <key>markdown_key</key>
         <value>markdown</value>
     </entry>
+    <entry>
+        <key>login</key>
+        <value>button.login.button</value>
+    </entry>
 </defaultsMap>

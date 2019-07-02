@@ -1,9 +1,12 @@
 package tech.stoneapp.secminhr.cavern
 
 import android.content.Context
+import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Build
+import android.text.Spanned
 import android.text.method.LinkMovementMethod
 import android.util.AttributeSet
+import android.util.Log
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import ru.noties.markwon.Markwon
@@ -12,6 +15,7 @@ import ru.noties.markwon.ext.strikethrough.StrikethroughPlugin
 import ru.noties.markwon.ext.tables.TablePlugin
 import ru.noties.markwon.ext.tasklist.TaskListPlugin
 import ru.noties.markwon.html.HtmlPlugin
+import ru.noties.markwon.image.AsyncDrawableSpan
 import ru.noties.markwon.image.ImagesPlugin
 import ru.noties.markwon.image.okhttp.OkHttpImagesPlugin
 import stoneapp.secminhr.cavern.api.results.Author
@@ -83,5 +87,28 @@ class CavernMarkdownTextView: TextView {
         }
         this.movementMethod = LinkMovementMethod.getInstance()
         parser.build().setMarkdown(this, text)
+    }
+
+    override fun setText(text: CharSequence?, type: BufferType?) {
+        Log.e("CavernTextView", text.toString())
+        super.setText(text, type)
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        Log.e("CavernTextView", (text is Spanned).toString())
+        if(text is Spanned) {
+            val drawableSpans = (text as Spanned).getSpans(0, text.length -1, AsyncDrawableSpan::class.java)
+            Log.e("CavernTextView", drawableSpans.toString())
+//            Log.e("CavernTextView", drawableSpans[0].drawable.result.toString())
+            val drawables = drawableSpans.map { it.drawable }
+            Log.e("CavernTextView", drawables.size.toString())
+            for(drawable in drawables) {
+                Log.e("CavernTextView", "asyncDrawable")
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Log.e("CavernTextView", "animated drawable?:${drawable is AnimatedVectorDrawable}")
+                }
+            }
+        }
     }
 }

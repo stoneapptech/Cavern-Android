@@ -3,24 +3,30 @@
     android:height="108dp"
     android:viewportWidth="435"
     android:viewportHeight="435">
-  <path
-      android:pathData="M87.5,220.86C87.5,149.11 145.75,90.86 217.5,90.86C289.25,90.86 347.5,149.11 347.5,220.86C347.5,292.61 289.25,350.86 217.5,350.86C145.75,350.86 87.5,292.61 87.5,220.86Z"
-      android:fillColor="#e89300"
-      android:fillAlpha="1"/>
-  <path
-      android:pathData="M217.5,417.5C107.12,417.5 17.5,327.89 17.5,217.5C17.5,107.12 107.12,17.5 217.5,17.5C317.95,17.5 401.2,91.72 415.37,188.26C416.77,197.8 417.5,207.57 417.5,217.5C417.5,327.89 327.88,417.5 217.5,417.5Z"
-      android:strokeAlpha="1"
-      android:strokeWidth="24"
-      android:fillAlpha="0"
-      android:strokeColor="#07ddeb"/>
-  <path
-      android:pathData="M30.54,347.82C30.54,327.12 47.34,310.32 68.04,310.32C88.74,310.32 105.54,327.12 105.54,347.82C105.54,368.52 88.74,385.32 68.04,385.32C47.34,385.32 30.54,368.52 30.54,347.82Z"
-      android:fillColor="#ffeb00"
-      android:fillAlpha="1"/>
+  <group android:name="logo">
+      <path
+          android:pathData="M87.5,220.86 a1,1 0 1,0 260 0 a1,1 0 0,0 -260 0"
+          android:fillColor="#e89300"
+          android:fillAlpha="1" />
 
-  <path
-      android:pathData="M356,90.86C356,78.44 366.08,68.36 378.5,68.36C390.92,68.36 401,78.44 401,90.86C401,103.28 390.92,113.36 378.5,113.36C366.08,113.36 356,103.28 356,90.86Z"
-      android:fillColor="#ffeb00"
-      android:fillAlpha="1"/>
+      <path
+          android:pathData="M217.5,417.5 a1,1 0 1,0 0 -400 a1,1 0 0,0 0 400"
+          android:strokeWidth="24"
+          android:strokeColor="#07ddeb"
+          android:strokeAlpha="1"/>
+
+      <path
+          android:name="bigPlanet"
+          android:pathData="M30.54,347.82 a1, 1 0 1,0 75 0 a1,1 0 0,0 -75 0"
+          android:fillColor="#ffeb00"
+          android:fillAlpha="1"/>
+
+      <path
+          android:name="smallPlanet"
+          android:pathData="M356,90.86 a1,1 0 1, 0 45 0 a1,1 0 0,0 -45 0"
+          android:fillColor="#ffeb00"
+          android:fillAlpha="1" />
+
+  </group>
 
 </vector>

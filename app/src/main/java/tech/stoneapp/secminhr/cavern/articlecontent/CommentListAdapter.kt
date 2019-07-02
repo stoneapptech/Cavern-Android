@@ -28,7 +28,7 @@ class CommentListAdapter(context: Context,
         val binding = try {
             DataBindingUtil.getBinding<CommentsItemBinding>(convertView!!)
         } catch (e: NullPointerException) {
-            tech.stoneapp.secminhr.cavern.databinding.CommentsItemBinding.inflate(LayoutInflater.from(context), parent, false)
+            CommentsItemBinding.inflate(LayoutInflater.from(context), parent, false)
         } ?: CommentsItemBinding.inflate(LayoutInflater.from(context), parent, false)
         binding.comment = array[position]
         Picasso.get().load(array[position].imageUrl).into(binding.root.findViewById<ImageView>(R.id.imageView))

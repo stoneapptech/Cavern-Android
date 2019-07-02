@@ -79,16 +79,20 @@
                             app:srcCompat="@drawable/thumb_up_outline"/>
                     </LinearLayout>
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip"
-                        style="@style/Widget.MaterialComponents.Chip.Action"
+                    <Button
+                        android:id="@+id/authorButton"
+                        style="@style/Widget.AppCompat.Button.Borderless"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
                         android:layout_marginBottom="8dp"
+                        android:backgroundTint="#00FFFFFF"
+                        android:background="#00FFFFFF"
+                        android:foreground="?attr/selectableItemBackground"
                         android:text="@{article.authorNickname}"
-                        tools:chipIcon="@drawable/ic_logo"
+                        android:textAlignment="center"
+                        android:textColor="#1E88E5"
                         tools:text="test"/>
 
                     <View
@@ -103,9 +107,9 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto"
                         android:paddingLeft="16dp"
-                        android:paddingTop="8dp"
+                        android:paddingTop="16dp"
                         android:paddingRight="16dp"
-                        android:paddingBottom="8dp"
+                        android:paddingBottom="16dp"
                         android:text=""
                         android:textColor="@color/article_content_text"
                         android:textSize="18sp"

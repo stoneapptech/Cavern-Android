@@ -86,7 +86,7 @@ class ArticleContentFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        chip.setOnClickListener {
+        authorButton.setOnClickListener {
             showUserDialog(authorUsername)
         }
         commentListView.adapter = adapter

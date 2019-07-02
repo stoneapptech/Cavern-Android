@@ -2,6 +2,7 @@ package tech.stoneapp.secminhr.cavern.articlecontent.markwonUtils
 
 import android.content.Context
 import android.content.res.Resources
+import androidx.core.content.res.ResourcesCompat
 import org.commonmark.ext.autolink.AutolinkExtension
 import org.commonmark.node.Heading
 import org.commonmark.parser.Parser
@@ -12,10 +13,12 @@ import ru.noties.markwon.MarkwonVisitor
 import ru.noties.markwon.core.MarkwonTheme
 import ru.noties.markwon.html.MarkwonHtmlParserImpl
 import ru.noties.markwon.html.MarkwonHtmlRenderer
+import ru.noties.markwon.image.AsyncDrawableLoader
 import ru.noties.markwon.syntax.Prism4jSyntaxHighlight
 import ru.noties.markwon.syntax.Prism4jThemeDefault
 import ru.noties.prism4j.Prism4j
 import stoneapp.secminhr.cavern.collideWith
+import tech.stoneapp.secminhr.cavern.R
 import tech.stoneapp.secminhr.cavern.articlecontent.AtUsernameSpan.AtUsernameNode
 import tech.stoneapp.secminhr.cavern.articlecontent.AtUsernameSpan.AtUsernameProcessor
 import tech.stoneapp.secminhr.cavern.articlecontent.AtUsernameSpan.AtUsernameVisitor
@@ -73,5 +76,12 @@ class CavernPlugin(val resources: Resources, val context: Context): AbstractMark
 
     override fun configureVisitor(builder: MarkwonVisitor.Builder) {
         builder.on(AtUsernameNode::class.java, AtUsernameVisitor(context))
+    }
+
+    override fun configureImages(builder: AsyncDrawableLoader.Builder) {
+        builder.placeholderDrawableProvider {
+            val drawable = ResourcesCompat.getDrawable(resources, R.drawable.loading_image_placeholder, null)
+            drawable
+        }
     }
 }
