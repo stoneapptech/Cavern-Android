@@ -5,7 +5,7 @@ import com.android.volley.toolbox.StringRequest
 
 open class CavernStringRequest(method: Int,
                           url: String,
-                          listener: Response.Listener<String>,
+                          val listener: Response.Listener<String>,
                           errorListener: Response.ErrorListener? = null):
         StringRequest(method, url, listener, errorListener) {
 

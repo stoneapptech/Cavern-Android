@@ -41,11 +41,14 @@ class ArticleContent(val id: Int, private val config: FirebaseRemoteConfig, priv
         queue.add(request)
     }
 
+
+
     private fun adjustContent(content: String): String {
         var adjusted = content.replace("&lt;", "<")
                 .replace("&gt;", ">")
                 .replace("\\/", "/")
                 .replace("&quot;", "\"")
+                .replace("&amp;", "&")
                 .replace("&amp", "&")
         val regex = Regex("@[a-zA-z0-9]+")
         adjusted = regex.replace(adjusted) {

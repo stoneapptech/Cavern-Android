@@ -8,7 +8,7 @@ import org.json.JSONObject
 open class CavernJsonObjectRequest(method: Int,
                               url: String,
                               jsonRequest: JSONObject?,
-                              listener: Listener<JSONObject>,
+                              val listener: Listener<JSONObject>,
                               errorListener: ErrorListener? = null): JsonObjectRequest(method, url, jsonRequest, listener, errorListener) {
 //
 //        private val client = OkHttpClient()

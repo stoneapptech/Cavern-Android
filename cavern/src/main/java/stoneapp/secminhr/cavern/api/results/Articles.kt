@@ -71,6 +71,8 @@ class Articles(private val config: FirebaseRemoteConfig, private val queue: Requ
                 .replace("&gt;", ">")
                 .replace("\\/", "/")
                 .replace("&quot;", "\"")
+                .replace("&amp;", "&")
+                .replace("&amp", "&")
         val regex = Regex("@[a-zA-z0-9]+")
         adjusted = regex.replace(adjusted) {
             it.value + "@"
