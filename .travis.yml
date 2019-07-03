@@ -1,8 +1,13 @@
-language: java
+language: android
+dist: trusty
 jdk:
   - oraclejdk8
+android:
+  components:
+    - build-tools-28.0.3
+    - android-28
 before_install:
   - chmod +x gradlew
   - chmod +x gradle/wrapper/gradle-wrapper.jar
 script:
-  - ./gradlew test build
+  - ./gradlew test
