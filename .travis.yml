@@ -7,7 +7,9 @@ android:
     - build-tools-28.0.3
     - android-28
 before_install:
+  - cd app
   - openssl aes-256-cbc -K $encrypted_a4024eeccc70_key -iv $encrypted_a4024eeccc70_iv -in google-services.json.enc -out google-services.json -d
+  - cd ..
   - chmod +x gradlew
   - chmod +x gradle/wrapper/gradle-wrapper.jar
 script:
