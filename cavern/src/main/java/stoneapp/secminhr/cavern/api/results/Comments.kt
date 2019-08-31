@@ -8,7 +8,6 @@ import stoneapp.secminhr.cavern.api.Cavern
 import stoneapp.secminhr.cavern.cavernError.CavernError
 import stoneapp.secminhr.cavern.cavernObject.Comment
 import stoneapp.secminhr.cavern.cavernService.CavernJsonObjectRequest
-import stoneapp.secminhr.cavern.getInt
 import stoneapp.secminhr.cavern.getJSONArray
 import stoneapp.secminhr.cavern.getJSONObject
 import stoneapp.secminhr.cavern.getString
@@ -27,7 +26,7 @@ class Comments(private val id: Int, private val config: FirebaseRemoteConfig, pr
                         val hashes = it.getJSONObject(config, "hash_key")
                         for (i in 0 until arr.length()) {
                             val comment = arr.getJSONObject(i)
-                            val id = comment.getInt(config, "id_key")
+                            val id = comment.getString(config, "id_key").toInt()
                             val username = comment.getString(config, "username_key")
                             val content = adjustContent(comment.getString(config, "markdown_key"))
                             val nickname = nicknames.getString(username)

@@ -2,6 +2,7 @@ package tech.stoneapp.secminhr.cavern.articlecontent
 
 import android.app.Activity
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,6 +47,14 @@ class CommentListAdapter(context: Context,
         }
         markdownView.setMarkdown(array[position].content)
         return binding.root
+    }
+
+    fun getPosition(commentID: Int): Int {
+        Log.e("CommentListAdapter", "inside getposition")
+        for(comment in array) {
+            Log.e("Adapter", comment.id.toString())
+        }
+        return array.indexOfFirst { it.id == commentID }
     }
 
 }

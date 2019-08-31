@@ -35,6 +35,8 @@ class UserFragment : Fragment(), AccountInfoHolder {
         setHasOptionsMenu(true)
         loadingProgressBar.visibility = View.GONE
         mainContentLayout.visibility = View.VISIBLE
+        closeButton.visibility = View.GONE
+        viewArticleButton.visibility = View.GONE
         Picasso.get().load(account.get()!!.avatarLink).into(avatarImageView)
     }
 

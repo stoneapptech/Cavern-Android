@@ -17,35 +17,24 @@ import stoneapp.secminhr.cavern.getString
 import java.text.SimpleDateFormat
 import java.util.*
 
-class Articles(private val config: FirebaseRemoteConfig, private val queue: RequestQueue): CavernResult<Articles> {
+class Articles(private val config: FirebaseRemoteConfig,
+               private val queue: RequestQueue,
+               private val page: Int,
+               private val limit: Int): CavernResult<Articles> {
 
     val articles: MutableList<ArticlePreview> = mutableListOf()
+    var totalPageCount: Int = 0
 
     override fun get(onSuccess: (Articles) -> Unit, onFailure: (CavernError) -> Unit) {
-        val url = "${Cavern.host}/ajax/posts.php?page="
-        val request = CavernJsonObjectRequest(Request.Method.GET, "${url}1", null,
+        val url = "${Cavern.host}/ajax/posts.php?page=$page&limit=$limit"
+        val request = CavernJsonObjectRequest(Request.Method.GET, url, null,
                 Response.Listener { json ->
-                    val postsNumber = json.getInt(config, "total_posts_num")
-                    val pageLimit = json.getInt(config, "page_limit")
-                    val totalPages = if(postsNumber % pageLimit == 0) {
-                        postsNumber/pageLimit
-                    } else {
-                        postsNumber/pageLimit + 1
-                    }
+                    val total = json.getInt(config, "total_posts_num")
+                    totalPageCount = total
                     articles += parseJson(json.getJSONArray(config, "posts_key"))
-                    if(totalPages > 1) {
-                        for(i in 2..totalPages) {
-                            val subRequest = CavernJsonObjectRequest(Request.Method.GET, "$url$i", null,
-                                    Response.Listener {
-                                        articles += parseJson(it.getJSONArray(config, "posts_key"))
-                                        if(i == totalPages) {
-                                            onSuccess(this)
-                                        }
-                                    })
-                            queue.add(subRequest)
-                        }
-                    }
-                })
+                    onSuccess(this)
+                }
+        )
         queue.add(request)
     }
 
@@ -58,7 +47,7 @@ class Articles(private val config: FirebaseRemoteConfig, private val queue: Requ
             val dateString =  json.getString(config, "date_key")
             val date = dateFormat.parse(dateString)
             val likes = json.getString(config, "upvote_key").toInt()
-            val id = json.getString(config, "pid_key").toInt()
+            val id = json.getInt(config, "pid_key")
             val author = json.getString(config, "author_key")
             val liked = json.getBoolean(config, "is_liked")
             articleArr += ArticlePreview(title, author, date, ObservableInt(likes), id, liked)

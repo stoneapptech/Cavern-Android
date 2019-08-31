@@ -18,6 +18,7 @@ class ArticleContent(val id: Int, private val config: FirebaseRemoteConfig, priv
     var content: String = ""
     var authorNickname: String = ""
     var authorUsername: String = ""
+    var html: String = ""
     var isLiked = false
 
     override fun get(onSuccess: (ArticleContent) -> Unit, onFailure: (CavernError) -> Unit) {

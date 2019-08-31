@@ -4,6 +4,11 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import org.jsoup.Jsoup
 import stoneapp.secminhr.cavern.api.Cavern
 import stoneapp.secminhr.cavern.api.results.ArticleContent
 import stoneapp.secminhr.cavern.cavernError.NetworkError
@@ -23,7 +28,16 @@ class ArticleContentViewModel(application: Application): AndroidViewModel(applic
         content = MutableLiveData()
         thread {
             Cavern.getInstance(getApplication()).getArticleContent(id).addOnSuccessListener {
-                this.content.postValue(it)
+                Thread {
+                    val request = StringRequest(Request.Method.GET, "https://stoneapp.tech/cavern/post.php?pid=$id",
+                            Response.Listener { contentText ->
+                                val doc = Jsoup.parse(contentText)
+                                val element = doc.selectFirst("div#post")
+                                it.html = contentText
+                                content.postValue(it)
+                            }, Response.ErrorListener {  })
+                    Volley.newRequestQueue(getApplication()).add(request)
+                }.start()
             }.addOnFailureListener {
                 val errorMessage = when (it) {
                     is NetworkError -> "There's something wrong with the server\nPlease try again later"
@@ -45,7 +59,7 @@ class ArticleContentViewModel(application: Application): AndroidViewModel(applic
             val errorMessage = when(it) {
                 is NetworkError -> "There's something wrong with the server\nPlease try again later"
                 is NoConnectionError -> "Your device seems to be offline\nPlease turn on the internet connection and try again"
-                is NotExistsError -> "Author doesn't dxist"
+                is NotExistsError -> "Author doesn't exist"
                 else -> "Some unexpected error happened\nPlease turn off the app and try again later\nWe are sorry for that"
             }
             errorHandler(errorMessage)

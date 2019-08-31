@@ -11,8 +11,8 @@ class Cavern private constructor(private val requestQueue: RequestQueue) {
     private val remoteConfig = FirebaseRemoteConfig.getInstance()
 
 
-    fun getArticles(): CavernTask<Articles> {
-        return CavernTask(Articles(remoteConfig, requestQueue))
+    fun getArticles(page: Int, limit: Int = 10): CavernTask<Articles> {
+        return CavernTask(Articles(remoteConfig, requestQueue, page, limit))
     }
 
     fun getArticleContent(id: Int): CavernTask<ArticleContent> {

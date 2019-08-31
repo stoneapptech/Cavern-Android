@@ -2,7 +2,6 @@ package tech.stoneapp.secminhr.cavern.articles
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +14,7 @@ import androidx.databinding.ObservableField
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -40,27 +40,15 @@ class ArticleFragment: Fragment() {
         viewModel = ViewModelProviders.of(activity!!).get(ArticleViewModel::class.java)
         refreshLayout.setColorSchemeResources(tech.stoneapp.secminhr.cavern.R.color.colorPrimary, tech.stoneapp.secminhr.cavern.R.color.colorPrimaryDark, tech.stoneapp.secminhr.cavern.R.color.colorAccent)
         refreshLayout.setOnRefreshListener {
-            viewModel.getArticles(true) {
-                Log.e("Article", "Toast: ${it}")
-                activity!!.runOnUiThread {
-                    Toast.makeText(this.context, "Article\n${it}", Toast.LENGTH_SHORT).show()
-                }
-            }.observe(this, Observer<Array<ArticlePreview>> { arr ->
+            viewModel.getArticle().observe(this, Observer<PagedList<ArticlePreview>> { arr ->
                 //arr will once cleanup to null before request
                 //thus don't need to do anything if receive null
                 arr?.let {
-                    if (it.isEmpty()) {
-                        Log.e("Article", "get empty articles")
-                        Toast.makeText(activity, "something is wrong with connection", Toast.LENGTH_SHORT).show()
-                    } else {
-                        viewModel.firstVisible = 0
-                        viewModel.top = 0
-                        adapter.array.clear()
-                        adapter.array.addAll(it.toMutableList())
-                        adapter.notifyDataSetChanged()
-                        contentReady.set(true)
-                        refreshLayout.isRefreshing = false
-                    }
+                    viewModel.firstVisible = 0
+                    viewModel.top = 0
+                    adapter.submitList(it)
+                    contentReady.set(true)
+                    refreshLayout.isRefreshing = false
                 }
             })
         }
@@ -90,7 +78,7 @@ class ArticleFragment: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = ArticleFragmentBinding.inflate(inflater, container, false)
-        adapter = ArticleListAdapter(arrayListOf()) { item, preview ->
+        adapter = ArticleListAdapter { item, preview ->
             viewModel.like(preview.id, onSuccess = { liked, likeCount ->
                 preview.liked = liked
                 preview.upvote.set(likeCount)
@@ -126,34 +114,21 @@ class ArticleFragment: Fragment() {
         articleListview.layoutManager = manager
         val divider = DividerItemDecoration(context, RecyclerView.VERTICAL)
         articleListview.addItemDecoration(divider)
-        viewModel.getArticles {
-            activity!!.runOnUiThread {
-                Toast.makeText(this.context, it, Toast.LENGTH_SHORT).show()
+        viewModel.getArticle().observe(this, Observer {
+            adapter.submitList(it)
+            contentReady.set(true)
+
+            val getFromModel = (articleListview.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition() == 0
+            val index = if (getFromModel) viewModel.firstVisible else
+                (articleListview.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+            val view = articleListview.getChildAt(0)
+            val top = when {
+                view == null -> 0
+                getFromModel -> viewModel.top
+                else -> view.top - articleListview.paddingTop
             }
-        }.observe(this, Observer<Array<ArticlePreview>> { arr ->
-            //arr will once cleanup to null before request
-            //thus don't need to do anything if receive null
-            arr?.let {
-                if (it.isEmpty()) {
-                    Toast.makeText(activity, "something is wrong with connection", Toast.LENGTH_SHORT).show()
-                } else {
-                    val getFromModel = (articleListview.layoutManager as LinearLayoutManager)
-                            .findFirstVisibleItemPosition() == 0
-                    val index = if (getFromModel) viewModel.firstVisible else
-                        (articleListview.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
-                    val view = articleListview.getChildAt(0)
-                    val top = when {
-                        view == null -> 0
-                        getFromModel -> viewModel.top
-                        else -> view.top - articleListview.paddingTop
-                    }
-                    adapter.array.clear()
-                    adapter.addAll(it.toMutableList())
-                    adapter.notifyDataSetChanged()
-                    (articleListview.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(index, top)
-                    contentReady.set(true)
-                }
-            }
+
+            (articleListview.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(index, top)
         })
     }
 }

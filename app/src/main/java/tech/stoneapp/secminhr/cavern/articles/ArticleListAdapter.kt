@@ -4,20 +4,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import stoneapp.secminhr.cavern.cavernObject.ArticlePreview
 import tech.stoneapp.secminhr.cavern.R
 import tech.stoneapp.secminhr.cavern.databinding.ArticleListItemBinding
 
-class ArticleListAdapter(val array: ArrayList<ArticlePreview>, val likeListener: (View, ArticlePreview) -> Unit):
-        RecyclerView.Adapter<ArticleListAdapter.ViewHolder>() {
+class ArticleListAdapter(val likeListener: (View, ArticlePreview) -> Unit):
+        PagedListAdapter<ArticlePreview, ArticleListAdapter.ViewHolder>(diffCallback) {
 
     class ViewHolder(val binding: ArticleListItemBinding): RecyclerView.ViewHolder(binding.root)
-
-    fun addAll(collection: MutableCollection<out ArticlePreview>) {
-        array.addAll(collection.sortedByDescending { it.id })
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
@@ -26,20 +24,35 @@ class ArticleListAdapter(val array: ArrayList<ArticlePreview>, val likeListener:
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val binding = holder.binding
-        binding.articlePreview = array[position]
-        val b = bundleOf("articleID" to array[position].id)
-        binding.root.setOnClickListener(
-                Navigation.createNavigateOnClickListener(R.id.action_navigation_article_to_articleContentFragment, b)
-        )
-        binding.thumbButton.setImageResource(
-                if(array[position].liked) R.drawable.thumb_up else R.drawable.thumb_up_outline
-        )
-        binding.thumbButton.setOnClickListener {
-            likeListener(binding.root, array[position])
+        val preview = getItem(position)
+        if(preview != null) {
+            val binding = holder.binding
+            binding.articlePreview = preview
+            binding.root.setOnClickListener {
+                val b = bundleOf("articleID" to preview.id)
+                binding.root.findNavController().navigate(R.id.showContentAction, b)
+            }
+            binding.thumbButton.setImageResource(
+                    if(preview.liked) R.drawable.thumb_up else R.drawable.thumb_up_outline
+            )
+            binding.thumbButton.setOnClickListener {
+                likeListener(binding.root, preview)
+            }
+            holder.binding.executePendingBindings()
         }
-        holder.binding.executePendingBindings()
+
     }
 
-    override fun getItemCount() = array.size
+    companion object {
+        private val diffCallback = object: DiffUtil.ItemCallback<ArticlePreview>() {
+            override fun areItemsTheSame(oldItem: ArticlePreview, newItem: ArticlePreview): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: ArticlePreview, newItem: ArticlePreview): Boolean {
+                return oldItem == newItem
+            }
+
+        }
+    }
 }

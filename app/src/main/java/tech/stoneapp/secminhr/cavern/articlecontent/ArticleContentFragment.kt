@@ -2,6 +2,7 @@ package tech.stoneapp.secminhr.cavern.articlecontent
 
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,7 @@ class ArticleContentFragment : Fragment() {
     lateinit var viewModel: ArticleContentViewModel
     lateinit var adapter: CommentListAdapter
     var pid = -1
+    var commentID = -1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -32,7 +34,16 @@ class ArticleContentFragment : Fragment() {
         pid = arguments?.getInt("articleID")!!
         var contentReady = false
         var commentReady = false
-
+        arguments?.getString("argument")?.let {
+            Log.e("ArticleContent", it)
+            if(it.contains("#")) {
+                val list = it.split("#")
+                pid = list[0].toInt()
+                commentID = (list[1].split("-"))[1].toInt()
+            } else {
+                pid = it.toInt()
+            }
+        }
         viewModel.getArticleContent(pid) {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         }.observe(this, Observer { article ->
@@ -55,7 +66,6 @@ class ArticleContentFragment : Fragment() {
                     Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
                 }
                 content_text.setMarkdown(article.content)
-
                 authorUsername = article.authorUsername
                 contentReady = true
                 if(commentReady && contentReady) {

@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_bottom_author_dialog.*
@@ -46,6 +47,15 @@ class BottomAuthorDialog : BottomSheetDialogFragment, AccountInfoHolder {
             loadingProgressBar.visibility = View.GONE
             mainContentLayout.visibility = View.VISIBLE
         })
+    }
+
+    override fun onStart() {
+        super.onStart()
+        closeButton.setOnClickListener {
+            this.dismiss()
+        }
+        val behavior = BottomSheetBehavior.from(binding.root.parent as View)
+        behavior.state = BottomSheetBehavior.STATE_EXPANDED
     }
 
     companion object {

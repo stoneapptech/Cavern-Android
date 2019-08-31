@@ -61,6 +61,7 @@ class CavernMarkdownTextView: TextView {
 
     private fun initialize() {
         parser = markdownBasicBuilder()
+//        RichText.initCacheDir(context)
     }
 
     private fun markdownBasicBuilder(): Markwon.Builder =
@@ -87,6 +88,12 @@ class CavernMarkdownTextView: TextView {
         }
         this.movementMethod = LinkMovementMethod.getInstance()
         parser.build().setMarkdown(this, text)
+//        RichText.fromMarkdown(text)
+//                .imageDownloader(DefaultImageDownloader())
+//                .autoPlay(true)
+//                .cache(CacheType.none)
+//                .placeHolder(ImagePlaceHolder())
+//                .into(this)
     }
 
     override fun setText(text: CharSequence?, type: BufferType?) {

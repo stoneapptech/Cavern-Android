@@ -19,15 +19,30 @@
         android:name="tech.stoneapp.secminhr.cavern.articles.ArticleFragment"
         android:label="ArticleFragment">
         <action
-            android:id="@+id/action_navigation_article_to_articleContentFragment"
+            android:id="@+id/showContentAction"
             app:destination="@id/articleContentFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right" >
+            <argument android:defaultValue="-1"
+                android:name="articleID" />
+            <argument android:defaultValue="-1"
+                android:name="commentID" />
+        </action>
+        <deepLink
+            android:id="@+id/deepLink2"
+            app:uri="https://stoneapp.tech/cavern/index.php" />
+        <deepLink
+            android:id="@+id/deepLink3"
+            app:uri="https://stoneapp.tech/cavern" />
     </fragment>
     <fragment
         android:id="@+id/articleContentFragment"
         android:name="tech.stoneapp.secminhr.cavern.articlecontent.ArticleContentFragment"
-        android:label="ArticleContentFragment"/>
+        android:label="ArticleContentFragment">
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="https://stoneapp.tech/cavern/post.php?pid={argument}" />
+    </fragment>
 </navigation>

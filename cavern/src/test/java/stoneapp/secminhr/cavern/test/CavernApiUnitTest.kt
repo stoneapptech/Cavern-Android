@@ -1,5 +1,6 @@
 package stoneapp.secminhr.cavern.test
 
+import androidx.databinding.ObservableInt
 import com.android.volley.NetworkResponse
 import com.android.volley.RequestQueue
 import com.android.volley.VolleyError
@@ -13,8 +14,12 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import stoneapp.secminhr.cavern.api.results.ArticleContent
+import stoneapp.secminhr.cavern.api.results.Articles
 import stoneapp.secminhr.cavern.cavernError.NotExistsError
+import stoneapp.secminhr.cavern.cavernObject.ArticlePreview
 import stoneapp.secminhr.cavern.cavernService.CavernJsonObjectRequest
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CavernApiUnitTest {
 
@@ -75,7 +80,7 @@ class CavernApiUnitTest {
             json.put("fetch", 1234583)
             json.put("post", subJson)
             request.listener.onResponse(json)
-            return@thenAnswer request
+            request
         }
 
         task.get(onSuccess = {
@@ -98,7 +103,7 @@ class CavernApiUnitTest {
         `when`(queue.add(any(CavernJsonObjectRequest::class.java))).thenAnswer {
             val request = it.arguments[0] as CavernJsonObjectRequest
             request.errorListener!!.onErrorResponse(VolleyError(response))
-            return@thenAnswer request
+            request
         }
 
         task.get(onSuccess = {
@@ -108,8 +113,40 @@ class CavernApiUnitTest {
         }
     }
 
-    //I'm a useless comment
-    //just to test travis
+    //only one page
+    @Test
+    fun articlesResultOnePage() {
+        val task = Articles(config, queue, 1, 10)
+        `when`(queue.add(any(CavernJsonObjectRequest::class.java))).thenAnswer {
+            val request = it.arguments[0] as CavernJsonObjectRequest
+            val json = when(request.url) {
+                "https://stoneapp.tech/cavern/ajax/posts.php?page=1&limit=10" -> {
+                    JSONObject("{\"fetch\":1562134491625,\"page_limit\":10,\"page\":1,\"all_posts_count\":1,\"posts\":[{\"author\":\"secminhr\",\"name\":\"secminhr\",\"pid\":646,\"title\":\"Cavern\",\"time\":\"2019-07-02 08:33:01\",\"likes_count\":\"0\",\"comments_count\":\"1\",\"islike\":false}]}")
+                }
+                else -> {
+                    Assert.fail()
+                }
+            }
+            request.listener.onResponse(json as JSONObject)
+            request
+        }
+
+        val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US)
+        val answer = ArticlePreview("Cavern", "secminhr", format.parse("2019-07-02 08:33:01"), ObservableInt(0), 646, false)
+
+        task.get(onSuccess = {
+            Assert.assertEquals(answer.title, it.articles[0].title)
+            Assert.assertEquals(answer.author, it.articles[0].author)
+            Assert.assertEquals(answer.date, it.articles[0].date)
+            Assert.assertEquals(answer.id, it.articles[0].id)
+            Assert.assertEquals(answer.liked, it.articles[0].liked)
+            Assert.assertEquals(answer.upvote.get(), it.articles[0].upvote.get())
+        }) {
+            Assert.fail()
+        }
+    }
+
+
 
 
 

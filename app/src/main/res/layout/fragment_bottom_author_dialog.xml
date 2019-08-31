@@ -11,15 +11,27 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:theme="@style/NoActionBarAppCompatTheme">
 
+
+        <ImageButton
+            android:id="@+id/closeButton"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_close_black_24dp"
+            android:padding="8dp"
+            android:layout_margin="8dp"
+            android:background="#00FFFFFF"
+            android:foreground="?attr/selectableItemBackground"/>
 
         <ProgressBar
             android:id="@+id/loadingProgressBar"
+            style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="?android:attr/progressBarStyle"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -305,6 +317,24 @@
                     </TableRow>
 
                 </TableLayout>
+
+                <Button
+                    android:id="@+id/viewArticleButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="看他的文章"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view"
+                    app:layout_constraintVertical_bias="0.0" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
