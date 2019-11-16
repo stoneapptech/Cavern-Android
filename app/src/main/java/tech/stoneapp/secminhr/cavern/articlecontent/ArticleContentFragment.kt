@@ -127,6 +127,6 @@ class ArticleContentFragment : Fragment() {
 
     private fun showUserDialog(username: String) {
         val bottomFragment = BottomAuthorDialog.newInstance(username)
-        bottomFragment.show(fragmentManager, "Author")
+        bottomFragment.show(fragmentManager!!, "Author")
     }
 }

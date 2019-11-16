@@ -15,8 +15,8 @@ android {
         applicationId "tech.stoneapp.secminhr.cavern"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 7
-        versionName "3.1.2"
+        versionCode 8
+        versionName "3.2.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
@@ -49,56 +49,58 @@ android {
         }
     }
     buildToolsVersion = '28.0.3'
+    configurations {
+        all*.exclude group:'org.intellij.lang.annotations', module:"jetified-annotaions-13.0.jar"
+        all*.exclude group:'org.intellij.lang.annotations', module:"jetified-annotations-java5-17.0.0.jar"
+        all*.exclude group:'org.jetbrains.annotations', module:"jetified-annotations-13.0.jar"
+        all*.exclude group:'org.jetbrains.annotations', module:"jetified-annotations-java5-17.0.0.jar"
+    }
 }
-
 dependencies {
+    final def markwon_version = '3.1.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta3'
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'androidx.vectordrawable:vectordrawable:1.0.1'
+    implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.robolectric:robolectric:4.1'
     testImplementation "org.mockito:mockito-all:1.10.19"
     testImplementation "org.powermock:powermock-module-junit4:1.6.2"
     testImplementation "org.powermock:powermock-api-mockito:1.6.2"
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-    implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
-    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0"
-    implementation "android.arch.navigation:navigation-ui-ktx:1.0.0"
-    implementation 'androidx.core:core-ktx:1.0.2'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation "androidx.lifecycle:lifecycle-extensions:2.1.0"
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.2.0-rc02'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.2.0-rc02'
+    implementation 'androidx.core:core-ktx:1.1.0'
     implementation "androidx.paging:paging-runtime-ktx:2.1.0"
-    implementation "ru.noties.markwon:core:3.0.0"
-    implementation "ru.noties.markwon:ext-latex:3.0.0"
-    implementation "ru.noties.markwon:ext-strikethrough:3.0.0"
-    implementation "ru.noties.markwon:ext-tables:3.0.0"
-    implementation "ru.noties.markwon:ext-tasklist:3.0.0"
-    implementation "ru.noties.markwon:html:3.0.0"
-    implementation "ru.noties.markwon:image-gif:3.0.0"
-    implementation "ru.noties.markwon:image-okhttp:3.0.0"
-    implementation "ru.noties.markwon:image-svg:3.0.0"
-    implementation "ru.noties.markwon:recycler:3.0.0"
-    implementation "ru.noties.markwon:recycler-table:3.0.0"
-    implementation "ru.noties.markwon:syntax-highlight:3.0.0"
+
+    implementation "ru.noties.markwon:core:$markwon_version"
+    implementation "ru.noties.markwon:ext-latex:$markwon_version"
+    implementation "ru.noties.markwon:ext-strikethrough:$markwon_version"
+    implementation "ru.noties.markwon:ext-tables:$markwon_version"
+    implementation "ru.noties.markwon:ext-tasklist:$markwon_version"
+    implementation "ru.noties.markwon:html:$markwon_version"
+    implementation "ru.noties.markwon:image-gif:$markwon_version"
+    implementation "ru.noties.markwon:image-okhttp:$markwon_version"
+    implementation "ru.noties.markwon:recycler:$markwon_version"
+    implementation "ru.noties.markwon:recycler-table:$markwon_version"
+    implementation "ru.noties.markwon:syntax-highlight:$markwon_version"
+
     implementation "ru.noties:prism4j:1.1.0"
-    implementation 'com.google.firebase:firebase-core:17.0.0'
-    implementation 'com.google.firebase:firebase-config:18.0.0'
+    implementation 'com.google.firebase:firebase-core:17.2.1'
+    implementation 'com.google.firebase:firebase-config:19.0.3'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
-    implementation 'com.google.firebase:firebase-firestore:20.1.0'
-    implementation 'com.google.firebase:firebase-messaging:19.0.1'
-    implementation 'com.google.firebase:firebase-auth:18.0.0'
-    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'com.google.firebase:firebase-firestore:21.2.1'
+    implementation 'com.google.firebase:firebase-messaging:20.0.0'
+    implementation 'com.google.firebase:firebase-auth:19.1.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation "com.atlassian.commonmark:commonmark-ext-autolink:0.12.1"
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation 'com.zzhoujay.richtext:richtext:3.0.8'
-    implementation 'com.zzhoujay.glideimagegetter:glideimagegetter:1.0.5'
     implementation 'org.jsoup:jsoup:1.12.1'
     implementation "com.android.volley:volley:1.1.1"
     implementation project(":cavern")

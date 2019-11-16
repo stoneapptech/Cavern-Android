@@ -9,12 +9,14 @@ import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_bottom_author_dialog.*
 import stoneapp.secminhr.cavern.cavernObject.Account
 import stoneapp.secminhr.cavern.cavernObject.Role
+import tech.stoneapp.secminhr.cavern.R
 import tech.stoneapp.secminhr.cavern.accountInfo.AccountInfoHolder
 import tech.stoneapp.secminhr.cavern.databinding.FragmentBottomAuthorDialogBinding
 
@@ -53,6 +55,9 @@ class BottomAuthorDialog : BottomSheetDialogFragment, AccountInfoHolder {
         super.onStart()
         closeButton.setOnClickListener {
             this.dismiss()
+        }
+        viewArticleButton.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.navigation_article)
         }
         val behavior = BottomSheetBehavior.from(binding.root.parent as View)
         behavior.state = BottomSheetBehavior.STATE_EXPANDED

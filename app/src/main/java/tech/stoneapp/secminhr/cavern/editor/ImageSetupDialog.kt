@@ -42,7 +42,7 @@ class ImageSetupDialog: DialogFragment() {
                 .create()
     }
 
-    fun show(manager: FragmentManager?, tag: String?, finishListener: (String, String) -> Unit) {
+    fun show(manager: FragmentManager, tag: String?, finishListener: (String, String) -> Unit) {
         super.show(manager, tag)
         this.finishListener = finishListener
     }

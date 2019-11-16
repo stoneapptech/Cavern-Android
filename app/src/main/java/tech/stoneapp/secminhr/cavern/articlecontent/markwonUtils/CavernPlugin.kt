@@ -11,7 +11,6 @@ import ru.noties.markwon.MarkwonConfiguration
 import ru.noties.markwon.MarkwonSpansFactory
 import ru.noties.markwon.MarkwonVisitor
 import ru.noties.markwon.core.MarkwonTheme
-import ru.noties.markwon.html.MarkwonHtmlParserImpl
 import ru.noties.markwon.html.MarkwonHtmlRenderer
 import ru.noties.markwon.image.AsyncDrawableLoader
 import ru.noties.markwon.syntax.Prism4jSyntaxHighlight
@@ -60,8 +59,7 @@ class CavernPlugin(val resources: Resources, val context: Context): AbstractMark
     }
 
     override fun configureHtmlRenderer(builder: MarkwonHtmlRenderer.Builder) {
-        builder.setHandler("font",
-                FontTagHandler(resources, context.packageName))
+        builder.setHandler("font", FontTagHandler(resources, context.packageName))
     }
 
     override fun configureSpansFactory(builder: MarkwonSpansFactory.Builder) {
@@ -69,7 +67,6 @@ class CavernPlugin(val resources: Resources, val context: Context): AbstractMark
     }
 
     override fun configureConfiguration(builder: MarkwonConfiguration.Builder) {
-        builder.htmlParser(MarkwonHtmlParserImpl.create())
         builder.syntaxHighlight(Prism4jSyntaxHighlight.create(Prism4j(CavernGrammarLocator()),
                 Prism4jThemeDefault.create()))
     }
@@ -84,4 +81,5 @@ class CavernPlugin(val resources: Resources, val context: Context): AbstractMark
             drawable
         }
     }
+
 }

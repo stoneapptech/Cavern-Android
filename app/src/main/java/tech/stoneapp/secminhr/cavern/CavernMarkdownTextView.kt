@@ -7,8 +7,6 @@ import android.text.Spanned
 import android.text.method.LinkMovementMethod
 import android.util.AttributeSet
 import android.util.Log
-import android.widget.TextView
-import androidx.annotation.RequiresApi
 import ru.noties.markwon.Markwon
 import ru.noties.markwon.ext.latex.JLatexMathPlugin
 import ru.noties.markwon.ext.strikethrough.StrikethroughPlugin
@@ -17,6 +15,7 @@ import ru.noties.markwon.ext.tasklist.TaskListPlugin
 import ru.noties.markwon.html.HtmlPlugin
 import ru.noties.markwon.image.AsyncDrawableSpan
 import ru.noties.markwon.image.ImagesPlugin
+import ru.noties.markwon.image.gif.GifPlugin
 import ru.noties.markwon.image.okhttp.OkHttpImagesPlugin
 import stoneapp.secminhr.cavern.api.results.Author
 import stoneapp.secminhr.cavern.cavernError.CavernError
@@ -24,7 +23,7 @@ import tech.stoneapp.secminhr.cavern.articlecontent.AtUsernameSpan.AtUsernamePlu
 import tech.stoneapp.secminhr.cavern.articlecontent.AtUsernameSpan.AtUsernameVisitor
 import tech.stoneapp.secminhr.cavern.articlecontent.markwonUtils.CavernPlugin
 
-class CavernMarkdownTextView: TextView {
+class CavernMarkdownTextView: androidx.appcompat.widget.AppCompatTextView {
 
     constructor(context: Context): super(context) {
         initialize()
@@ -34,12 +33,6 @@ class CavernMarkdownTextView: TextView {
     }
     constructor(context: Context, attrs: AttributeSet, defStyleArr: Int):
             super(context, attrs, defStyleArr) {
-        initialize()
-    }
-
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    constructor(context: Context, attrs: AttributeSet, defStyleArr: Int, defStyleRes: Int):
-            super(context, attrs, defStyleArr, defStyleRes) {
         initialize()
     }
 
@@ -61,7 +54,6 @@ class CavernMarkdownTextView: TextView {
 
     private fun initialize() {
         parser = markdownBasicBuilder()
-//        RichText.initCacheDir(context)
     }
 
     private fun markdownBasicBuilder(): Markwon.Builder =
@@ -71,6 +63,7 @@ class CavernMarkdownTextView: TextView {
                     .usePlugin(TaskListPlugin.create(context))
                     .usePlugin(HtmlPlugin.create())
                     .usePlugin(ImagesPlugin.create(context))
+                    .usePlugin(GifPlugin.create(true))
                     .usePlugin(OkHttpImagesPlugin.create())
                     .usePlugin(JLatexMathPlugin.create(70f))
                     .usePlugin(CavernPlugin(resources, context))
@@ -88,12 +81,6 @@ class CavernMarkdownTextView: TextView {
         }
         this.movementMethod = LinkMovementMethod.getInstance()
         parser.build().setMarkdown(this, text)
-//        RichText.fromMarkdown(text)
-//                .imageDownloader(DefaultImageDownloader())
-//                .autoPlay(true)
-//                .cache(CacheType.none)
-//                .placeHolder(ImagePlaceHolder())
-//                .into(this)
     }
 
     override fun setText(text: CharSequence?, type: BufferType?) {
@@ -107,7 +94,6 @@ class CavernMarkdownTextView: TextView {
         if(text is Spanned) {
             val drawableSpans = (text as Spanned).getSpans(0, text.length -1, AsyncDrawableSpan::class.java)
             Log.e("CavernTextView", drawableSpans.toString())
-//            Log.e("CavernTextView", drawableSpans[0].drawable.result.toString())
             val drawables = drawableSpans.map { it.drawable }
             Log.e("CavernTextView", drawables.size.toString())
             for(drawable in drawables) {

@@ -59,7 +59,7 @@ class EditorFragment: Fragment(), ContentHolder {
                 when (it) {
                     is Link -> {
                         val dialog = LinkSetupDialog()
-                        dialog.show(fragmentManager, "Setup Link Dialog") { title, url ->
+                        dialog.show(fragmentManager!!, "Setup Link Dialog") { title, url ->
                             it.title = title
                             it.url = url
                             val result = it.handle(view, content.get()!!, contentEditText.selectionStart)
@@ -71,7 +71,7 @@ class EditorFragment: Fragment(), ContentHolder {
                     }
                     is Photo -> {
                         val dialog = ImageSetupDialog()
-                        dialog.show(fragmentManager, "Setup Link Dialog") { altText, url ->
+                        dialog.show(fragmentManager!!, "Setup Link Dialog") { altText, url ->
                             it.altText = altText
                             it.url = url
                             val result = it.handle(view, content.get()!!, contentEditText.selectionStart)
@@ -170,11 +170,11 @@ class EditorFragment: Fragment(), ContentHolder {
         })
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater?.inflate(R.menu.editor_toolbar_menu, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val hash = hashMapOf(
                 R.id.preview_menu_item to ::onPreviewSelected
         )

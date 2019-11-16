@@ -36,34 +36,21 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.core:core-ktx:1.0.2'
+    implementation 'androidx.core:core-ktx:1.1.0'
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.robolectric:robolectric:4.1'
     testImplementation "org.mockito:mockito-all:1.10.19"
     testImplementation "org.json:json:20160810"
-    implementation 'org.jsoup:jsoup:1.11.3'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    implementation 'org.jsoup:jsoup:1.12.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation 'com.google.firebase:firebase-core:17.0.0'
-    implementation 'com.google.firebase:firebase-config:18.0.0'
-    implementation 'com.google.firebase:firebase-firestore:20.1.0'
-    implementation 'com.google.firebase:firebase-auth:18.0.0'
+    implementation 'com.google.firebase:firebase-core:17.2.1'
+    implementation 'com.google.firebase:firebase-config:19.0.3'
+    implementation 'com.google.firebase:firebase-firestore:21.2.1'
+    implementation 'com.google.firebase:firebase-auth:19.1.0'
     implementation 'com.android.volley:volley:1.1.1'
-    implementation "ru.noties.markwon:core:3.0.0"
-    implementation "ru.noties.markwon:ext-latex:3.0.0"
-    implementation "ru.noties.markwon:ext-strikethrough:3.0.0"
-    implementation "ru.noties.markwon:ext-tables:3.0.0"
-    implementation "ru.noties.markwon:ext-tasklist:3.0.0"
-    implementation "ru.noties.markwon:html:3.0.0"
-    implementation "ru.noties.markwon:image-gif:3.0.0"
-    implementation "ru.noties.markwon:image-okhttp:3.0.0"
-    implementation "ru.noties.markwon:image-svg:3.0.0"
-    implementation "ru.noties.markwon:recycler:3.0.0"
-    implementation "ru.noties.markwon:recycler-table:3.0.0"
-    implementation "ru.noties.markwon:syntax-highlight:3.0.0"
-    implementation 'com.google.firebase:firebase-database:18.0.0'
-    implementation 'com.google.firebase:firebase-functions:18.0.0'
-    implementation "androidx.room:room-runtime:2.1.0-alpha06"
-    kapt "androidx.room:room-compiler:2.1.0-alpha06"
+    implementation 'com.google.firebase:firebase-database:19.2.0'
+    implementation 'com.google.firebase:firebase-functions:19.0.1'
+    implementation "androidx.room:room-runtime:2.2.1"
+    kapt "androidx.room:room-compiler:2.2.1"
 }

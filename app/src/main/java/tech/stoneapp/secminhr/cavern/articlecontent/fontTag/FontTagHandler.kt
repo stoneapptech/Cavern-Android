@@ -10,6 +10,7 @@ import ru.noties.markwon.html.MarkwonHtmlRenderer
 import ru.noties.markwon.html.TagHandler
 
 class FontTagHandler(val resource: Resources, val packageName: String): TagHandler() {
+
     override fun handle(visitor: MarkwonVisitor, renderer: MarkwonHtmlRenderer, tag: HtmlTag) {
         if(tag.isBlock) {
             visitChildren(visitor, renderer, tag.asBlock)

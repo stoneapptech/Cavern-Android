@@ -34,7 +34,7 @@ class EditorActivity : AppCompatActivity() {
 
         val manager = PreferenceManager.getDefaultSharedPreferences(this)
         var title = manager.getString("title", "(Untitled)")
-        if(title.isEmpty()) {
+        if(title.isNullOrEmpty()) {
             title = "(Untitled)"
         }
         editorFragment.title.set(title)

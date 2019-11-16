@@ -13,7 +13,7 @@ import stoneapp.secminhr.cavern.cavernObject.Role
 import tech.stoneapp.secminhr.cavern.R
 import tech.stoneapp.secminhr.cavern.accountInfo.AccountInfoHolder
 import tech.stoneapp.secminhr.cavern.activity.LoggedUserModelHolder
-import tech.stoneapp.secminhr.cavern.databinding.FragmentBottomAuthorDialogBinding
+import tech.stoneapp.secminhr.cavern.databinding.FragmentAuthorBinding
 
 class UserFragment : Fragment(), AccountInfoHolder {
 
@@ -22,7 +22,7 @@ class UserFragment : Fragment(), AccountInfoHolder {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val binding = FragmentBottomAuthorDialogBinding.inflate(inflater)
+        val binding = FragmentAuthorBinding.inflate(inflater)
         binding.holder = this
         return binding.root
     }
@@ -33,21 +33,17 @@ class UserFragment : Fragment(), AccountInfoHolder {
         val sharedViewModel = (activity as LoggedUserModelHolder).loggedUserModel
         account.set(sharedViewModel.user.get()!!)
         setHasOptionsMenu(true)
-        loadingProgressBar.visibility = View.GONE
-        mainContentLayout.visibility = View.VISIBLE
-        closeButton.visibility = View.GONE
-        viewArticleButton.visibility = View.GONE
         Picasso.get().load(account.get()!!.avatarLink).into(avatarImageView)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.user_fragment_menu, menu)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.user_fragment_menu, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val selector:HashMap<Int, () -> Unit> = hashMapOf(R.id.logout_item to ::logout)
-        selector[item?.itemId]?.invoke()
-        return selector.keys.contains(item?.itemId)
+        selector[item.itemId]?.invoke()
+        return selector.keys.contains(item.itemId)
     }
 
     private fun logout() {

@@ -3,6 +3,7 @@ package tech.stoneapp.secminhr.cavern.articlecontent.markwonUtils
 import ru.noties.prism4j.GrammarLocator
 import ru.noties.prism4j.Prism4j
 
+
 class CavernGrammarLocator: GrammarLocator {
 
     private val supportedLanguages = mutableSetOf(
