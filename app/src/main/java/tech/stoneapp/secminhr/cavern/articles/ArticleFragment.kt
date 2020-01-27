@@ -23,8 +23,7 @@ import stoneapp.secminhr.cavern.cavernObject.Account
 import stoneapp.secminhr.cavern.cavernObject.ArticlePreview
 import tech.stoneapp.secminhr.cavern.activity.MainActivity
 import tech.stoneapp.secminhr.cavern.databinding.ArticleFragmentBinding
-import tech.stoneapp.secminhr.cavern.editor.EditorActivity
-import tech.stoneapp.secminhr.cavern.editor.tools.Header1
+import tech.stoneapp.secminhr.cavern.editor.NewArticleActivity
 
 
 class ArticleFragment: Fragment() {
@@ -70,8 +69,7 @@ class ArticleFragment: Fragment() {
         this.userCanPost.set(canPost)
 
         addArticleButton.setOnClickListener {
-            val intent = Intent(activity, EditorActivity::class.java)
-            intent.putExtra("tools", Header1::class.java)
+            val intent = Intent(activity, NewArticleActivity::class.java)
             startActivity(intent)
         }
     }

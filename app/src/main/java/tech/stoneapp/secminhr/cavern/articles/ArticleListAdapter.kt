@@ -30,7 +30,10 @@ class ArticleListAdapter(val likeListener: (View, ArticlePreview) -> Unit):
             binding.articlePreview = preview
             binding.root.setOnClickListener {
                 val b = bundleOf("articleID" to preview.id)
-                binding.root.findNavController().navigate(R.id.showContentAction, b)
+                val navController = binding.root.findNavController()
+                if(navController.currentDestination?.id == R.id.navigation_article) {
+                    navController.navigate(R.id.showContentAction, b)
+                }
             }
             binding.thumbButton.setImageResource(
                     if(preview.liked) R.drawable.thumb_up else R.drawable.thumb_up_outline

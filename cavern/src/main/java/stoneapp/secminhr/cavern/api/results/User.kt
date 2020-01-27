@@ -1,7 +1,6 @@
 package stoneapp.secminhr.cavern.api.results
 
 import com.android.volley.*
-import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import org.jsoup.Jsoup
 import stoneapp.secminhr.cavern.api.Cavern
@@ -48,20 +47,22 @@ open class User(val username: String,
                                     val postCount = it.getInt(remoteConfig, "posts_count_key")
                                     RoleDetail(level).get({ detail ->
                                         account = Account(username, nickname, detail.role, imageLink, postCount, email)
+                                        onSuccess(this)
                                     }) {
                                         onFailure(it)
                                     }
 
-                                    //firebase auth
-                                    val customUid = createCustomUid()
-                                    val data = hashMapOf("uid" to customUid)
-                                    FirebaseFunctions.getInstance()
-                                            .getHttpsCallable("createCustomToken")
-                                            .call(data)
-                                            .continueWith {
-                                                val result = it.result?.data as Map<String, String>
-                                                customToken = result["token"]!!
-                                            }
+//                                    //firebase auth
+//                                    val customUid = createCustomUid()
+//                                    val data = hashMapOf("uid" to customUid)
+//                                    FirebaseFunctions.getInstance()
+//                                            .getHttpsCallable("createCustomToken")
+//                                            .call(data)
+//                                            .continueWith {
+//                                                val result = it.result?.data as Map<String, String>
+//                                                customToken = result["token"]!!
+//                                            }
+
 
                                 })
                         requestQueue.add(subRequest)

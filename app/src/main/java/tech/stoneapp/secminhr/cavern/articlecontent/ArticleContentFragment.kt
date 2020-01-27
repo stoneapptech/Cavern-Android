@@ -1,11 +1,13 @@
 package tech.stoneapp.secminhr.cavern.articlecontent
 
+import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
@@ -17,7 +19,9 @@ import stoneapp.secminhr.cavern.cavernError.NoConnectionError
 import stoneapp.secminhr.cavern.cavernError.NotExistsError
 import tech.stoneapp.secminhr.cavern.R
 import tech.stoneapp.secminhr.cavern.accountInfo.bottomAuthorDialog.BottomAuthorDialog
+import tech.stoneapp.secminhr.cavern.activity.MainActivity
 import tech.stoneapp.secminhr.cavern.databinding.FragmentArticleContentBinding
+import tech.stoneapp.secminhr.cavern.editor.NewCommentActivity
 
 class ArticleContentFragment : Fragment() {
 
@@ -107,7 +111,16 @@ class ArticleContentFragment : Fragment() {
             }
         }
         if(commentListView.headerViewsCount < 1) {
-            commentListView.addHeaderView(layoutInflater.inflate(R.layout.comment_list_header, null))
+            val header = layoutInflater.inflate(R.layout.comment_list_header, null)
+            val leaveCommentButton = header.findViewById<Button>(R.id.commentButton)
+            val logged = (activity as MainActivity).hasUserLoggedIn.get()
+            leaveCommentButton.isEnabled = logged
+            leaveCommentButton.setOnClickListener {
+                val intent = Intent(activity, NewCommentActivity::class.java)
+                intent.putExtra("pid", pid)
+                startActivity(intent)
+            }
+            commentListView.addHeaderView(header)
         }
         likeButton.setOnClickListener {
             viewModel.like(pid, errorHandler = {
@@ -122,6 +135,24 @@ class ArticleContentFragment : Fragment() {
                     likeButton.setImageResource(R.drawable.thumb_up_outline)
                 }
             }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val preference = PreferenceManager.getDefaultSharedPreferences(activity?.application)
+        val needReloadComment = preference.getBoolean("comment_outdated", false)
+        if(needReloadComment) {
+            preference.edit {
+                putBoolean("comment_outdated", false)
+            }
+            viewModel.getComments(pid) {
+                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            }.observe(this, Observer {
+                adapter.clear()
+                adapter.addAll(it.toMutableList())
+                adapter.notifyDataSetChanged()
+            })
         }
     }
 

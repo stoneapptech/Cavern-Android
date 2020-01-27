@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="tech.stoneapp.secminhr.cavern">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
@@ -24,6 +25,12 @@
             android:name=".editor.EditorActivity"
             android:theme="@style/NoActionBarAppCompatTheme">
         </activity>
+        <activity
+            android:name=".editor.NewArticleActivity"
+            android:theme="@style/NoActionBarAppCompatTheme" />
+        <activity
+            android:name=".editor.NewCommentActivity"
+            android:theme="@style/NoActionBarAppCompatTheme" />
 
         <meta-data
             android:name="firebase_crashlytics_collection_enabled"

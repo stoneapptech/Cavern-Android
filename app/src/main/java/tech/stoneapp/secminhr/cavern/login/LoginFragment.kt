@@ -38,10 +38,6 @@ class LoginFragment: Fragment() {
         })
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
     fun onLoginClicked(view: View) {
         login(username.get()!!, password.get()!!)
     }

@@ -27,6 +27,10 @@ class Cavern private constructor(private val requestQueue: RequestQueue) {
         return CavernTask(Comments(id, remoteConfig, requestQueue))
     }
 
+    fun sendComment(pid: Int, content: String): CavernTask<SendComment> {
+        return CavernTask(SendComment(pid, content, requestQueue))
+    }
+
     fun login(username: String, password: String): CavernTask<User> {
         return CavernTask(User(username, password, remoteConfig, requestQueue))
     }

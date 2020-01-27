@@ -53,6 +53,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:id="@+id/usernameInputLayout"
                         android:enabled="@{!fragment.isLoggingIn}"
                         android:hint="Username"
                         android:inputType="textNoSuggestions"

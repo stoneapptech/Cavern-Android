@@ -44,11 +44,15 @@ class StartActivity : AppCompatActivity() {
                     remoteConfig.fetch(expireTime).addOnCompleteListener {
                         if (it.isSuccessful) {
                             remoteConfig.activate()
-                            startActivity(Intent(this@StartActivity, MainActivity::class.java))
+                            val intent = Intent(this@StartActivity, MainActivity::class.java)
+                            intent.putExtra("remoteConfig", true)
+                            startActivity(intent)
                         } else {
                             Log.e("application", it.exception.toString())
                             it.exception?.let { _ ->
-                                Toast.makeText(this@StartActivity, "We are not able to get info online, please connect your device to the internet", Toast.LENGTH_LONG).show()
+                                val intent = Intent(this@StartActivity, MainActivity::class.java)
+                                intent.putExtra("remoteConfig", false)
+                                startActivity(intent)
                             }
                         }
                         finish()
